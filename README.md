@@ -19,15 +19,20 @@ Dopo un paio di minuti il sito sarà online con un indirizzo tipo `meridian-trad
 A questo punto il sito FUNZIONA GIÀ (notizie e prezzi mostreranno un messaggio di attesa,
 e la chat dirà che va ancora configurata). I prossimi passi attivano tutto.
 
-## 3. Attiva l'assistente AI (obbligatorio)
-1. Vai su https://console.anthropic.com e crea un account.
-2. Nella sezione "API Keys", crea una nuova chiave e copiala (inizia con `sk-ant-...`).
-   Anthropic dà crediti gratuiti iniziali per iniziare a fare test.
+## 3. Attiva l'assistente AI (obbligatorio) — con Gemini, gratis
+1. Vai su https://aistudio.google.com (Google AI Studio) e accedi con un account Google.
+2. Clicca "Get API key" → "Create API key" e copia la chiave che appare.
+   Gemini ha un piano gratuito permanente (non solo credito di prova): niente carta di credito richiesta.
 3. Torna su Vercel, apri il tuo progetto → "Settings" → "Environment Variables".
-4. Aggiungi una variabile chiamata `ANTHROPIC_API_KEY` e incolla la chiave come valore. Salva.
+4. Aggiungi una variabile chiamata `GEMINI_API_KEY` e incolla la chiave come valore. Salva.
 5. Vai su "Deployments" e rilancia l'ultimo deploy ("Redeploy") perché la modifica abbia effetto.
 
-Da questo momento la chat risponderà davvero.
+Da questo momento la chat risponderà davvero, gratuitamente (con un limite di richieste al minuto/giorno,
+più che sufficiente per iniziare).
+
+Nota: se in futuro ricevi un errore che dice che il modello non esiste più, vai su
+https://ai.google.dev/gemini-api/docs/models per vedere il nome aggiornato, poi su Vercel
+aggiungi una variabile `GEMINI_MODEL` con quel nome (es. `gemini-2.5-flash`) — non serve toccare il codice.
 
 ## 4. Attiva le notizie (facoltativo ma consigliato)
 1. Vai su https://newsapi.org/register e crea un account gratuito.
@@ -37,15 +42,9 @@ Da questo momento la chat risponderà davvero.
 
 Nota: il piano gratuito di NewsAPI ha un limite di richieste giornaliere, sufficiente per iniziare.
 
-## 5. Attiva i prezzi azionari (facoltativo)
-I prezzi delle criptovalute (Bitcoin, Ethereum, Solana) funzionano già da subito, gratis, senza fare nulla.
-Se vuoi aggiungere anche indici/azioni USA:
-1. Vai su https://www.alphavantage.co/support/#api-key e ottieni una chiave gratuita.
-2. Aggiungi su Vercel la variabile `ALPHA_VANTAGE_KEY`.
-3. Redeploy.
-
-Il piano gratuito ha un limite basso di richieste al minuto: va benissimo per iniziare,
-ma se il sito cresce andrà aggiornato a un piano a pagamento più avanti.
+## 5. Prezzi degli strumenti (già attivi, nessuna chiave richiesta)
+Le 12 criptovalute nel catalogo (Bitcoin, Ethereum, Solana, ecc.) funzionano già gratis
+senza configurare nulla, tramite CoinGecko. Non serve alcuna chiave per questa parte.
 
 ## 6. Il tuo dominio personalizzato (facoltativo)
 Su Vercel, "Settings" → "Domains" puoi collegare un dominio tuo (es. meridianmarkets.it)
@@ -59,9 +58,23 @@ se ne acquisti uno da un registrar come Namecheap o Register.it (a pagamento, in
   l'attivazione di Google AdSense (gratuita) da https://www.google.com/adsense.
 
 ## Struttura dei file
-- `index.html` — l'intero sito (struttura, stile, chat)
-- `api/chat.js` — collega il sito all'AI di Claude, tenendo la chiave al sicuro
-- `api/market.js` — recupera prezzi e notizie da fonti gratuite
+- `index.html` — la home (strumenti personalizzabili, accesso AI in evidenza, notizie, banner Scuola del Trading)
+- `chat.html` — la pagina dedicata all'assistente AI
+- `school.html` — indice della Scuola del Trading
+- `school-basi.html`, `school-forex.html`, `school-rischio.html` — i tre capitoli scritti finora
+- `api/chat.js` — collega il sito a Gemini, tenendo la chiave al sicuro
+- `api/instrument.js` — prezzo, variazione e storico di un singolo strumento (crypto, gratuito)
+- `api/market.js` — recupera le notizie economiche da NewsAPI
+
+## Novità: Scuola del Trading
+In home, sotto la sezione notizie, c'è un banner che porta a `school.html`: l'indice dei
+capitoli. Per ora sono scritti 3 capitoli (Le basi, Il Forex, Gestione del rischio), più
+altri 3 mostrati come "in arrivo" per far vedere dove sta andando il progetto. Ogni capitolo
+ha in fondo un pulsante che apre l'assistente con una domanda già pronta legata a
+quell'argomento (usa il link tipo `chat.html?q=...`).
+
+Quando vuoi aggiungere altri capitoli, basta copiare uno dei file `school-*.html` esistenti,
+cambiare titolo e contenuto, e aggiungere una card nuova in `school.html`.
 
 Puoi sempre tornare da me se vuoi modificare i colori, aggiungere una sezione, cambiare
 il tono delle risposte dell'assistente, o passare a più mercati/valute.
