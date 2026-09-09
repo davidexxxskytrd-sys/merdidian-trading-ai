@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meridian — Il mercato, spiegato ogni mattina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0E14;
-    --panel:#12171F;
-    --panel-2:#161C25;
-    --border:#232B36;
-    --text:#EDEFF2;
-    --muted:#8A93A3;
+    --bg:#000000;
+    --panel:#0A0A0A;
+    --panel-2:#111111;
+    --border:#232323;
+    --text:#F2F2F2;
+    --muted:#8A8A8A;
     --gold:#D4A93E;
     --gold-dim:#8C742C;
     --up:#4CAF7D;
@@ -25,7 +25,7 @@
     background:var(--bg);
     color:var(--text);
     font-family:'Inter',sans-serif;
-    line-height:1.5;
+    line-height:1.55;
   }
   a{color:inherit;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
@@ -37,9 +37,9 @@
   }
   header .wrap{display:flex;align-items:center;justify-content:space-between;}
   .logo{
-    font-family:'Newsreader',serif;
-    font-size:22px;
-    font-weight:500;
+    font-family:'Inter',sans-serif;
+    font-size:21px;
+    font-weight:600;
     letter-spacing:0.2px;
   }
   .logo em{font-style:italic;color:var(--gold);}
@@ -50,10 +50,11 @@
   /* Hero */
   .hero{padding:64px 0 40px;border-bottom:1px solid var(--border);}
   .hero h1{
-    font-family:'Newsreader',serif;
-    font-weight:400;
-    font-size:clamp(34px,5vw,54px);
-    line-height:1.1;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:clamp(32px,4.6vw,50px);
+    line-height:1.15;
+    letter-spacing:-0.5px;
     max-width:720px;
     margin:0 0 18px;
   }
@@ -114,9 +115,9 @@
   }
 
   .section-title{
-    font-family:'Newsreader',serif;
-    font-size:22px;
-    font-weight:500;
+    font-family:'Inter',sans-serif;
+    font-size:19px;
+    font-weight:600;
     margin:0 0 20px;
     padding-bottom:14px;
     border-bottom:1px solid var(--border);
@@ -135,9 +136,9 @@
   }
   .news-meta .tag{color:var(--gold);}
   .news-item h3{
-    font-family:'Newsreader',serif;
-    font-weight:500;
-    font-size:19px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:17px;
     margin:0 0 8px;
   }
   .news-item p{color:var(--muted);font-size:14.5px;margin:0;}
@@ -162,7 +163,7 @@
   }
   .dot{width:7px;height:7px;border-radius:50%;background:var(--up);}
   .chat-head span{font-size:13px;color:var(--muted);}
-  .chat-head strong{font-family:'Newsreader',serif;font-weight:500;font-size:16px;}
+  .chat-head strong{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;}
 
   .chat-body{
     flex:1;
