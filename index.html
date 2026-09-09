@@ -12,6 +12,7 @@
     --panel:#0A0A0A;
     --panel-2:#111111;
     --border:#232323;
+    --border-soft:#1A1A1A;
     --text:#F2F2F2;
     --muted:#8A8A8A;
     --gold:#D4A93E;
@@ -28,42 +29,42 @@
     line-height:1.55;
   }
   a{color:inherit;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+  button{font-family:inherit;}
 
-  /* Header */
+  /* Header — centrato */
   header{
     border-bottom:1px solid var(--border);
-    padding:20px 0;
+    padding:26px 0 20px;
+    text-align:center;
   }
-  header .wrap{display:flex;align-items:center;justify-content:space-between;}
   .logo{
-    font-family:'Inter',sans-serif;
-    font-size:21px;
-    font-weight:600;
+    font-size:22px;
+    font-weight:700;
     letter-spacing:0.2px;
+    margin-bottom:12px;
   }
-  .logo em{font-style:italic;color:var(--gold);}
-  nav{display:flex;gap:28px;font-size:14px;color:var(--muted);}
+  .logo em{font-style:normal;color:var(--gold);}
+  nav{display:flex;gap:26px;font-size:14px;color:var(--muted);justify-content:center;}
   nav a{text-decoration:none;}
   nav a:hover{color:var(--text);}
+  nav a.assistant-link{color:var(--gold);}
 
   /* Hero */
-  .hero{padding:64px 0 40px;border-bottom:1px solid var(--border);}
+  .hero{padding:56px 0 40px;border-bottom:1px solid var(--border);text-align:center;}
   .hero h1{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:clamp(32px,4.6vw,50px);
-    line-height:1.15;
+    font-weight:700;
+    font-size:clamp(30px,4.4vw,46px);
+    line-height:1.18;
     letter-spacing:-0.5px;
-    max-width:720px;
-    margin:0 0 18px;
+    max-width:640px;
+    margin:0 auto 16px;
   }
-  .hero h1 i{font-style:italic;color:var(--gold);}
   .hero p{
     color:var(--muted);
-    font-size:17px;
-    max-width:520px;
-    margin:0 0 28px;
+    font-size:16.5px;
+    max-width:480px;
+    margin:0 auto 26px;
   }
   .cta{
     display:inline-block;
@@ -74,167 +75,154 @@
     padding:12px 22px;
     text-decoration:none;
     border:1px solid var(--gold);
+    border-radius:2px;
   }
   .cta:hover{background:#C79A34;}
 
-  /* Ticker */
-  .ticker-strip{
-    border-bottom:1px solid var(--border);
-    background:var(--panel);
-    overflow-x:auto;
-  }
-  .ticker-row{
+  main{padding:52px 0 80px;}
+
+  .section-head{
     display:flex;
-    gap:0;
-    min-width:max-content;
+    align-items:center;
+    justify-content:space-between;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:22px;
   }
-  .ticker-item{
-    padding:16px 26px;
-    border-right:1px solid var(--border);
-    min-width:150px;
+  .section-title{font-size:18px;font-weight:600;margin:0;}
+  .section-sub{font-size:13px;color:var(--muted);margin-top:4px;}
+
+  .ghost-btn{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text);
+    font-size:13px;
+    padding:8px 14px;
+    cursor:pointer;
+    border-radius:2px;
   }
-  .ticker-item .sym{font-size:12px;color:var(--muted);margin-bottom:6px;}
-  .ticker-item .price{
+  .ghost-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* Strumenti */
+  .instruments-section{padding-bottom:52px;margin-bottom:52px;border-bottom:1px solid var(--border);}
+  .instrument-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+  }
+  .instrument-card{
+    background:var(--panel);
+    padding:20px 18px;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .instrument-card:hover{background:var(--panel-2);}
+  .instrument-card .name{font-size:13px;color:var(--muted);margin-bottom:10px;}
+  .instrument-card .sym{font-size:12px;color:var(--gold);letter-spacing:0.4px;margin-bottom:2px;}
+  .instrument-card .price{
     font-family:'IBM Plex Mono',monospace;
-    font-size:17px;
+    font-size:19px;
+    margin-bottom:6px;
   }
-  .ticker-item .chg{font-family:'IBM Plex Mono',monospace;font-size:13px;margin-left:8px;}
+  .instrument-card .chg{font-family:'IBM Plex Mono',monospace;font-size:13px;}
   .up{color:var(--up);}
   .down{color:var(--down);}
+  #instruments-status{color:var(--muted);font-size:14px;padding:20px 0;}
 
-  /* Main layout */
-  main{padding:48px 0 80px;}
-  .grid{
-    display:grid;
-    grid-template-columns:1fr 420px;
-    gap:40px;
-    align-items:start;
+  /* Loading dots */
+  .dots{display:inline-flex;gap:5px;align-items:center;padding:6px 0;}
+  .dots span{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--gold);
+    animation:bounce 1.1s infinite ease-in-out;
   }
-  @media (max-width:900px){
-    .grid{grid-template-columns:1fr;}
-  }
-
-  .section-title{
-    font-family:'Inter',sans-serif;
-    font-size:19px;
-    font-weight:600;
-    margin:0 0 20px;
-    padding-bottom:14px;
-    border-bottom:1px solid var(--border);
+  .dots span:nth-child(2){animation-delay:0.15s;}
+  .dots span:nth-child(3){animation-delay:0.3s;}
+  @keyframes bounce{
+    0%, 80%, 100%{transform:translateY(0);opacity:0.5;}
+    40%{transform:translateY(-6px);opacity:1;}
   }
 
-  /* News list */
-  .news-item{
-    padding:20px 0;
-    border-bottom:1px solid var(--border);
+  /* Modal dettaglio strumento */
+  .modal-overlay{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.75);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:50;
   }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--panel);
+    border:1px solid var(--border);
+    max-width:520px;
+    width:100%;
+    padding:28px;
+    max-height:85vh;
+    overflow-y:auto;
+  }
+  .modal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+  .modal-top h3{font-size:22px;margin:0;}
+  .modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;}
+  .modal-close:hover{color:var(--text);}
+  .modal-sym{color:var(--gold);font-size:13px;letter-spacing:0.4px;margin-bottom:18px;}
+  .modal-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;}
+  .modal-price{font-family:'IBM Plex Mono',monospace;font-size:28px;}
+  .modal-chart{width:100%;height:80px;margin-bottom:18px;}
+  .modal-blurb{color:var(--muted);font-size:14.5px;line-height:1.6;}
+
+  /* Selettore strumenti */
+  .picker-list{display:flex;flex-direction:column;gap:2px;margin:18px 0;}
+  .picker-item{
+    display:flex;align-items:center;gap:12px;
+    padding:11px 12px;
+    border:1px solid var(--border);
+    cursor:pointer;
+  }
+  .picker-item.selected{border-color:var(--gold);}
+  .picker-item input{accent-color:var(--gold);}
+  .picker-item .p-name{font-size:14px;}
+  .picker-item .p-sym{font-size:12px;color:var(--muted);margin-left:auto;}
+  .picker-note{font-size:12.5px;color:var(--muted);margin-bottom:4px;}
+  .picker-save{
+    background:var(--gold);border:1px solid var(--gold);color:#1A1405;
+    font-weight:600;font-size:14px;padding:10px 18px;cursor:pointer;width:100%;
+    border-radius:2px;
+  }
+  .picker-save:disabled{opacity:0.4;cursor:default;}
+
+  /* Notizie */
+  .news-section{padding-bottom:52px;margin-bottom:52px;border-bottom:1px solid var(--border);}
+  .news-item{padding:20px 0;border-bottom:1px solid var(--border-soft);}
   .news-item:first-child{padding-top:0;}
-  .news-meta{
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:8px;
-  }
+  .news-meta{font-size:12px;color:var(--muted);margin-bottom:8px;}
   .news-meta .tag{color:var(--gold);}
-  .news-item h3{
-    font-family:'Inter',sans-serif;
-    font-weight:600;
-    font-size:17px;
-    margin:0 0 8px;
-  }
+  .news-item h3{font-weight:600;font-size:16.5px;margin:0 0 8px;}
   .news-item p{color:var(--muted);font-size:14.5px;margin:0;}
   #news-status{color:var(--muted);font-size:14px;}
 
-  /* Chat panel */
-  .chat-panel{
-    position:sticky;
-    top:24px;
+  /* Callout assistente */
+  .assistant-callout{
+    border:1px solid var(--border);
+    padding:36px;
+    text-align:center;
     background:var(--panel);
-    border:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    height:640px;
   }
-  .chat-head{
-    padding:16px 18px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    gap:10px;
+  .assistant-callout .dot-live{
+    width:7px;height:7px;border-radius:50%;background:var(--up);
+    display:inline-block;margin-right:8px;
   }
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--up);}
-  .chat-head span{font-size:13px;color:var(--muted);}
-  .chat-head strong{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;}
+  .assistant-callout h2{font-size:22px;margin:0 0 10px;font-weight:700;}
+  .assistant-callout p{color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 22px;}
 
-  .chat-body{
-    flex:1;
-    overflow-y:auto;
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .msg{max-width:88%;font-size:14.5px;padding:10px 13px;}
-  .msg.bot{
-    align-self:flex-start;
-    background:var(--panel-2);
-    border:1px solid var(--border);
-  }
-  .msg.user{
-    align-self:flex-end;
-    background:#1D2530;
-    border:1px solid var(--gold-dim);
-  }
-  .msg.bot::before{
-    content:"Meridian";
-    display:block;
-    font-size:10px;
-    letter-spacing:0.4px;
-    color:var(--gold);
-    margin-bottom:4px;
-  }
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;}
 
-  .chat-input-row{
-    border-top:1px solid var(--border);
-    padding:14px;
-    display:flex;
-    gap:10px;
-  }
-  .chat-input-row textarea{
-    flex:1;
-    resize:none;
-    background:var(--bg);
-    border:1px solid var(--border);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    font-size:14px;
-    padding:10px 12px;
-    height:44px;
-  }
-  .chat-input-row textarea:focus{outline:1px solid var(--gold);}
-  .send-btn{
-    background:var(--gold);
-    border:1px solid var(--gold);
-    color:#1A1405;
-    font-weight:600;
-    font-size:13px;
-    padding:0 18px;
-    cursor:pointer;
-  }
-  .send-btn:hover{background:#C79A34;}
-  .send-btn:disabled{opacity:0.5;cursor:default;}
-
-  .disclaimer{
-    font-size:11.5px;
-    color:var(--muted);
-    padding:10px 18px;
-    border-top:1px solid var(--border);
-  }
-
-  footer{
-    border-top:1px solid var(--border);
-    padding:28px 0;
-    color:var(--muted);
-    font-size:13px;
+  @media (max-width:640px){
+    nav{flex-wrap:wrap;gap:16px;}
   }
 </style>
 </head>
@@ -244,84 +232,231 @@
   <div class="wrap">
     <div class="logo">Meridian<em>.</em></div>
     <nav>
-      <a href="#mercati">Mercati</a>
+      <a href="#strumenti">Mercati</a>
       <a href="#notizie">Notizie</a>
-      <a href="#chat">Assistente</a>
+      <a href="chat.html" class="assistant-link">Assistente →</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <h1>Il mercato, <i>spiegato</i><br>ogni mattina.</h1>
-    <p>Notizie, andamenti e un assistente AI con cui ragionare — prima che apra la giornata di trading.</p>
-    <a class="cta" href="#chat">Fai una domanda all'assistente</a>
+    <h1>Il mercato, spiegato ogni mattina.</h1>
+    <p>Notizie e andamenti dei mercati che segui davvero — e un assistente AI pronto a spiegarteli.</p>
+    <a class="cta" href="chat.html">Fai una domanda all'assistente</a>
   </div>
 </section>
 
-<div class="ticker-strip" id="ticker-strip">
-  <div class="wrap">
-    <div class="ticker-row" id="ticker-row">
-      <div class="ticker-item"><div class="sym">Caricamento dati di mercato…</div></div>
-    </div>
-  </div>
-</div>
-
 <main>
-  <div class="wrap grid">
+  <div class="wrap">
 
-    <section id="notizie">
-      <h2 class="section-title">Notizie di oggi</h2>
-      <div id="news-list">
-        <div id="news-status">Caricamento notizie…</div>
+    <section class="instruments-section" id="strumenti">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">I tuoi strumenti</h2>
+          <div class="section-sub">Fino a 5 strumenti — clicca su uno per vederne storia e andamento</div>
+        </div>
+        <button class="ghost-btn" id="customize-btn">Personalizza</button>
+      </div>
+      <div class="instrument-grid" id="instrument-grid">
+        <div id="instruments-status"><span class="dots"><span></span><span></span><span></span></span></div>
       </div>
     </section>
 
-    <section class="chat-panel" id="chat">
-      <div class="chat-head">
-        <div class="dot"></div>
+    <section class="news-section" id="notizie">
+      <div class="section-head">
         <div>
-          <strong>Assistente Meridian</strong><br>
-          <span>Chiedi del mercato, di un titolo, di una notizia</span>
+          <h2 class="section-title">Notizie di oggi</h2>
+          <div class="section-sub">Quello che sta muovendo l'economia globale</div>
         </div>
       </div>
-      <div class="chat-body" id="chat-body">
-        <div class="msg bot">Ciao. Posso aiutarti a interpretare le notizie di oggi o l'andamento di un mercato. Cosa vuoi capire?</div>
+      <div id="news-list">
+        <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
       </div>
-      <div class="chat-input-row">
-        <textarea id="chat-input" placeholder="Es: perché sta salendo il petrolio oggi?"></textarea>
-        <button class="send-btn" id="send-btn">Invia</button>
-      </div>
-      <div class="disclaimer">Meridian fornisce informazione generale, non consulenza finanziaria personalizzata.</div>
+    </section>
+
+    <section class="assistant-callout">
+      <div><span class="dot-live"></span><span style="font-size:13px;color:var(--muted);">Assistente online</span></div>
+      <h2>Hai una domanda sul mercato?</h2>
+      <p>Chiedi all'assistente Meridian di spiegarti una notizia, un andamento, o il contesto dietro un movimento di prezzo.</p>
+      <a class="cta" href="chat.html">Apri l'assistente</a>
     </section>
 
   </div>
 </main>
 
-<footer>
-  <div class="wrap">Meridian — versione dimostrativa.</div>
-</footer>
+<footer>Meridian — versione dimostrativa.</footer>
+
+<!-- Modal dettaglio strumento -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal">
+    <div class="modal-top">
+      <h3 id="detail-name">—</h3>
+      <button class="modal-close" id="detail-close">✕</button>
+    </div>
+    <div class="modal-sym" id="detail-sym">—</div>
+    <div class="modal-price-row">
+      <div class="modal-price" id="detail-price">—</div>
+      <div id="detail-chg" class="chg">—</div>
+    </div>
+    <svg class="modal-chart" id="detail-chart" viewBox="0 0 400 80" preserveAspectRatio="none"></svg>
+    <div class="modal-blurb" id="detail-blurb">—</div>
+  </div>
+</div>
+
+<!-- Modal selettore strumenti -->
+<div class="modal-overlay" id="picker-modal">
+  <div class="modal">
+    <div class="modal-top">
+      <h3>Scegli i tuoi strumenti</h3>
+      <button class="modal-close" id="picker-close">✕</button>
+    </div>
+    <div class="picker-note">Seleziona fino a 5 strumenti da mostrare in home.</div>
+    <div class="picker-list" id="picker-list"></div>
+    <button class="picker-save" id="picker-save">Salva</button>
+  </div>
+</div>
 
 <script>
-// ---------- Market ticker ----------
-async function loadMarket(){
-  const row = document.getElementById('ticker-row');
+// ---------- Catalogo strumenti (statico, crypto — funziona senza chiavi) ----------
+const CATALOG = [
+  {id:'bitcoin', symbol:'BTC', name:'Bitcoin', blurb:"La prima criptovaluta al mondo, creata nel 2009 da un autore anonimo con lo pseudonimo Satoshi Nakamoto, pensata come moneta digitale decentralizzata al di fuori del controllo di banche e governi."},
+  {id:'ethereum', symbol:'ETH', name:'Ethereum', blurb:"La piattaforma che nel 2015 ha introdotto gli smart contract, alla base della maggior parte delle applicazioni decentralizzate e di migliaia di altri progetti crypto."},
+  {id:'solana', symbol:'SOL', name:'Solana', blurb:"Blockchain nata nel 2020, progettata per gestire un numero molto alto di transazioni al secondo con costi molto bassi rispetto a Bitcoin ed Ethereum."},
+  {id:'ripple', symbol:'XRP', name:'XRP', blurb:"Creata nel 2012 dall'azienda Ripple per velocizzare ed abbattere i costi dei pagamenti internazionali tra banche e istituzioni finanziarie."},
+  {id:'cardano', symbol:'ADA', name:'Cardano', blurb:"Blockchain lanciata nel 2017, sviluppata con un approccio accademico basato su ricerca scientifica sottoposta a revisione paritaria."},
+  {id:'dogecoin', symbol:'DOGE', name:'Dogecoin', blurb:"Nata nel 2013 come parodia scherzosa del mondo delle criptovalute, è diventata nel tempo una delle monete digitali più conosciute e scambiate al mondo."},
+  {id:'litecoin', symbol:'LTC', name:'Litecoin', blurb:"Una delle prime alternative a Bitcoin, lanciata nel 2011 con l'obiettivo di offrire transazioni più rapide ed economiche."},
+  {id:'polkadot', symbol:'DOT', name:'Polkadot', blurb:"Progetto che punta a collegare tra loro blockchain diverse e indipendenti, permettendo loro di scambiarsi dati e valore."},
+  {id:'chainlink', symbol:'LINK', name:'Chainlink', blurb:"Rete che collega i contratti intelligenti a dati provenienti dal mondo reale, come prezzi di mercato o eventi esterni."},
+  {id:'avalanche-2', symbol:'AVAX', name:'Avalanche', blurb:"Blockchain lanciata nel 2020, nota per la velocità con cui conferma le transazioni e per i costi contenuti."},
+  {id:'tron', symbol:'TRX', name:'Tron', blurb:"Piattaforma lanciata nel 2017, pensata inizialmente per contenuti digitali e intrattenimento decentralizzato."},
+  {id:'binancecoin', symbol:'BNB', name:'BNB', blurb:"Il token della piattaforma di scambio Binance, usato tra le altre cose per pagare le commissioni sulla rete a costi ridotti."}
+];
+const DEFAULT_SELECTION = ['bitcoin','ethereum','solana','ripple','cardano'];
+
+function getSelection(){
   try{
-    const res = await fetch('/api/market');
+    const saved = JSON.parse(localStorage.getItem('meridian:selection'));
+    if(Array.isArray(saved) && saved.length > 0) return saved.slice(0,5);
+  }catch(e){}
+  return DEFAULT_SELECTION;
+}
+function setSelection(ids){
+  localStorage.setItem('meridian:selection', JSON.stringify(ids));
+}
+
+// ---------- Rendering strumenti ----------
+async function loadInstrument(item){
+  try{
+    const res = await fetch('/api/instrument?id=' + item.id);
     const data = await res.json();
-    row.innerHTML = data.items.map(it => `
-      <div class="ticker-item">
-        <div class="sym">${it.symbol}</div>
-        <span class="price">${it.price}</span>
-        <span class="chg ${it.changePct >= 0 ? 'up' : 'down'}">${it.changePct >= 0 ? '+' : ''}${it.changePct.toFixed(2)}%</span>
-      </div>
-    `).join('');
+    return {...item, price: data.price, changePct: data.changePct, history: data.history || []};
   }catch(e){
-    row.innerHTML = '<div class="ticker-item"><div class="sym">Dati di mercato non disponibili al momento.</div></div>';
+    return {...item, price: null, changePct: null, history: []};
   }
 }
 
-// ---------- News ----------
+async function renderInstruments(){
+  const grid = document.getElementById('instrument-grid');
+  const selectedIds = getSelection();
+  const selected = CATALOG.filter(c => selectedIds.includes(c.id));
+  const results = await Promise.all(selected.map(loadInstrument));
+
+  grid.innerHTML = results.map(r => `
+    <div class="instrument-card" data-id="${r.id}">
+      <div class="name">${r.name}</div>
+      <div class="sym">${r.symbol}</div>
+      <div class="price">${r.price != null ? '$' + r.price.toLocaleString('en-US') : '—'}</div>
+      <div class="chg ${r.changePct >= 0 ? 'up' : 'down'}">${r.changePct != null ? (r.changePct >= 0 ? '+' : '') + r.changePct.toFixed(2) + '%' : ''}</div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.instrument-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const item = results.find(r => r.id === card.dataset.id);
+      openDetail(item);
+    });
+  });
+}
+
+// ---------- Modal dettaglio ----------
+const detailModal = document.getElementById('detail-modal');
+function openDetail(item){
+  document.getElementById('detail-name').textContent = item.name;
+  document.getElementById('detail-sym').textContent = item.symbol;
+  document.getElementById('detail-price').textContent = item.price != null ? '$' + item.price.toLocaleString('en-US') : '—';
+  const chg = document.getElementById('detail-chg');
+  if(item.changePct != null){
+    chg.textContent = (item.changePct >= 0 ? '+' : '') + item.changePct.toFixed(2) + '% (24h)';
+    chg.className = 'chg ' + (item.changePct >= 0 ? 'up' : 'down');
+  } else {
+    chg.textContent = '';
+  }
+  document.getElementById('detail-blurb').textContent = item.blurb;
+  drawSparkline(item.history, item.changePct >= 0);
+  detailModal.classList.add('open');
+}
+document.getElementById('detail-close').addEventListener('click', () => detailModal.classList.remove('open'));
+detailModal.addEventListener('click', (e) => { if(e.target === detailModal) detailModal.classList.remove('open'); });
+
+function drawSparkline(history, isUp){
+  const svg = document.getElementById('detail-chart');
+  if(!history || history.length < 2){ svg.innerHTML = ''; return; }
+  const min = Math.min(...history), max = Math.max(...history);
+  const range = max - min || 1;
+  const points = history.map((v, i) => {
+    const x = (i / (history.length - 1)) * 400;
+    const y = 75 - ((v - min) / range) * 70;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const color = isUp ? '#4CAF7D' : '#E0616B';
+  svg.innerHTML = `<polyline points="${points}" fill="none" stroke="${color}" stroke-width="2"/>`;
+}
+
+// ---------- Modal selettore ----------
+const pickerModal = document.getElementById('picker-modal');
+const pickerList = document.getElementById('picker-list');
+document.getElementById('customize-btn').addEventListener('click', openPicker);
+document.getElementById('picker-close').addEventListener('click', () => pickerModal.classList.remove('open'));
+pickerModal.addEventListener('click', (e) => { if(e.target === pickerModal) pickerModal.classList.remove('open'); });
+
+function openPicker(){
+  const current = new Set(getSelection());
+  pickerList.innerHTML = CATALOG.map(c => `
+    <label class="picker-item ${current.has(c.id) ? 'selected' : ''}" data-id="${c.id}">
+      <input type="checkbox" ${current.has(c.id) ? 'checked' : ''}>
+      <span class="p-name">${c.name}</span>
+      <span class="p-sym">${c.symbol}</span>
+    </label>
+  `).join('');
+  updatePickerState();
+  pickerList.querySelectorAll('.picker-item').forEach(el => {
+    el.querySelector('input').addEventListener('change', () => {
+      const checked = pickerList.querySelectorAll('input:checked').length;
+      if(checked > 5){
+        el.querySelector('input').checked = false;
+      }
+      el.classList.toggle('selected', el.querySelector('input').checked);
+      updatePickerState();
+    });
+  });
+  pickerModal.classList.add('open');
+}
+function updatePickerState(){
+  const checked = pickerList.querySelectorAll('input:checked').length;
+  document.getElementById('picker-save').disabled = checked === 0;
+}
+document.getElementById('picker-save').addEventListener('click', () => {
+  const ids = [...pickerList.querySelectorAll('.picker-item')]
+    .filter(el => el.querySelector('input').checked)
+    .map(el => el.dataset.id);
+  setSelection(ids);
+  pickerModal.classList.remove('open');
+  renderInstruments();
+});
+
+// ---------- Notizie ----------
 async function loadNews(){
   const list = document.getElementById('news-list');
   try{
@@ -343,62 +478,7 @@ async function loadNews(){
   }
 }
 
-// ---------- Chat ----------
-const chatBody = document.getElementById('chat-body');
-const chatInput = document.getElementById('chat-input');
-const sendBtn = document.getElementById('send-btn');
-let history = [];
-
-function addMessage(text, role){
-  const div = document.createElement('div');
-  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
-  div.textContent = text;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-async function sendMessage(){
-  const text = chatInput.value.trim();
-  if(!text) return;
-  addMessage(text, 'user');
-  history.push({role:'user', content:text});
-  chatInput.value = '';
-  sendBtn.disabled = true;
-
-  const thinking = document.createElement('div');
-  thinking.className = 'msg bot';
-  thinking.textContent = '…';
-  chatBody.appendChild(thinking);
-  chatBody.scrollTop = chatBody.scrollHeight;
-
-  try{
-    const res = await fetch('/api/chat', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({messages: history})
-    });
-    const data = await res.json();
-    thinking.remove();
-    const reply = data.reply || 'Non sono riuscito a rispondere, riprova tra poco.';
-    addMessage(reply, 'bot');
-    history.push({role:'assistant', content:reply});
-  }catch(e){
-    thinking.remove();
-    addMessage('Errore di connessione. Riprova tra poco.', 'bot');
-  }finally{
-    sendBtn.disabled = false;
-  }
-}
-
-sendBtn.addEventListener('click', sendMessage);
-chatInput.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter' && !e.shiftKey){
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
-loadMarket();
+renderInstruments();
 loadNews();
 </script>
 
