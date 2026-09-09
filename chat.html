@@ -202,6 +202,13 @@ chatInput.addEventListener('keydown', (e) => {
 document.querySelectorAll('.suggestion').forEach(btn => {
   btn.addEventListener('click', () => sendMessage(btn.dataset.q));
 });
+
+// Se arriviamo da un link tipo chat.html?q=Spiegami+il+forex, inviamo subito quella domanda
+const params = new URLSearchParams(window.location.search);
+const prefilled = params.get('q');
+if(prefilled){
+  sendMessage(prefilled);
+}
 </script>
 
 </body>
