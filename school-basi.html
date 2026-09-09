@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le basi del trading — Scuola del Trading — Meridian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000; --panel:#0A0A0A; --panel-2:#111111; --border:#232323;
+    --text:#F2F2F2; --muted:#8A8A8A; --gold:#D4A93E; --up:#4CAF7D; --down:#E0616B;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65;}
+  a{color:var(--gold);}
+  .wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+
+  header{border-bottom:1px solid var(--border);padding:22px 0;text-align:center;}
+  .logo{font-size:20px;font-weight:700;margin-bottom:10px;}
+  .logo em{font-style:normal;color:var(--gold);}
+  header a.back{font-size:13px;color:var(--muted);text-decoration:none;}
+  header a.back:hover{color:var(--text);}
+
+  .chapter-hero{padding:56px 0 40px;text-align:center;border-bottom:1px solid var(--border);}
+  .chapter-hero .num{font-size:12px;color:var(--gold);letter-spacing:1.5px;margin-bottom:14px;}
+  .chapter-hero h1{font-size:clamp(28px,4vw,40px);font-weight:700;margin:0 0 14px;letter-spacing:-0.5px;}
+  .chapter-hero p{color:var(--muted);font-size:15.5px;max-width:480px;margin:0 auto;}
+
+  article{padding:52px 0;}
+  article h2{font-size:21px;font-weight:700;margin:44px 0 14px;}
+  article h2:first-child{margin-top:0;}
+  article p{color:#D8D8D8;font-size:15.5px;margin:0 0 16px;}
+  article ul{color:#D8D8D8;font-size:15.5px;padding-left:20px;margin:0 0 16px;}
+  article li{margin-bottom:8px;}
+  .callout{
+    border-left:2px solid var(--gold);
+    background:var(--panel);
+    padding:16px 20px;
+    margin:22px 0;
+    font-size:14.5px;
+    color:var(--muted);
+  }
+  .callout strong{color:var(--text);}
+
+  .ask-ai{
+    margin-top:52px;border:1px solid var(--border);background:var(--panel);
+    padding:30px;text-align:center;
+  }
+  .ask-ai h3{font-size:17px;margin:0 0 8px;font-weight:700;}
+  .ask-ai p{color:var(--muted);font-size:14px;margin:0 0 18px;}
+  .cta-gold{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--gold);color:#1A1405;font-weight:700;font-size:14px;
+    padding:11px 20px;text-decoration:none;border-radius:2px;border:1px solid var(--gold);
+  }
+  .cta-gold:hover{background:#C79A34;}
+
+  .chapter-nav{display:flex;justify-content:space-between;margin-top:36px;font-size:14px;}
+  .chapter-nav a{text-decoration:none;}
+
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;margin-top:40px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Meridian<em>.</em></div>
+    <a class="back" href="school.html">← Scuola del Trading</a>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="wrap">
+    <div class="num">CAPITOLO 01</div>
+    <h1>Le basi del trading</h1>
+    <p>Prima di parlare di grafici o strategie, serve capire di cosa stiamo davvero parlando.</p>
+  </div>
+</section>
+
+<article class="wrap">
+
+  <h2>Cos'è il trading</h2>
+  <p>Fare trading significa comprare e vendere uno strumento finanziario — un'azione, una valuta, una criptovaluta — con l'obiettivo di trarre un profitto dalla differenza tra il prezzo a cui lo compri e quello a cui lo rivendi. È diverso dall'investimento a lungo termine: chi fa trading si muove su orizzonti temporali più brevi, da pochi minuti a qualche settimana, e presta molta attenzione alle oscillazioni di prezzo di breve periodo.</p>
+
+  <div class="callout"><strong>Da sapere:</strong> il trading non è un modo garantito per guadagnare. È un'attività con rischi reali, in cui è possibile perdere il capitale investito.</div>
+
+  <h2>I principali mercati</h2>
+  <p>Non esiste "il mercato": esistono tanti mercati diversi, ognuno con le sue regole e i suoi orari.</p>
+  <ul>
+    <li><strong>Mercato azionario</strong> — dove si scambiano quote di proprietà di aziende quotate in borsa.</li>
+    <li><strong>Forex (mercato valutario)</strong> — dove si scambiano valute, una contro l'altra (es. euro contro dollaro).</li>
+    <li><strong>Materie prime</strong> — petrolio, oro, grano, e altri beni fisici scambiati su mercati dedicati.</li>
+    <li><strong>Criptovalute</strong> — monete digitali come Bitcoin ed Ethereum, scambiate su piattaforme specializzate 24 ore su 24.</li>
+  </ul>
+
+  <h2>Come funziona un ordine</h2>
+  <p>Quando vuoi comprare o vendere qualcosa, invii un "ordine" alla piattaforma che usi. I due tipi più comuni sono:</p>
+  <ul>
+    <li><strong>Ordine a mercato</strong> — viene eseguito subito, al prezzo attuale disponibile.</li>
+    <li><strong>Ordine limite</strong> — viene eseguito solo se il prezzo raggiunge un livello che scegli tu, anche se questo può richiedere tempo, o non succedere mai.</li>
+  </ul>
+
+  <h2>Il vocabolario essenziale</h2>
+  <p>Alcuni termini che incontrerai ovunque, quindi meglio conoscerli fin da subito:</p>
+  <ul>
+    <li><strong>Bid e ask</strong> — il prezzo a cui puoi vendere (bid) e quello a cui puoi comprare (ask). La differenza tra i due si chiama <strong>spread</strong>.</li>
+    <li><strong>Posizione lunga (long)</strong> — quando compri, scommettendo che il prezzo salirà.</li>
+    <li><strong>Posizione corta (short)</strong> — quando vendi per primo (anche senza possedere l'asset), scommettendo che il prezzo scenderà.</li>
+    <li><strong>Leva finanziaria</strong> — la possibilità di muovere una somma più grande del capitale che hai realmente depositato. Amplifica sia i guadagni che le perdite, quindi va usata con grande cautela.</li>
+  </ul>
+
+  <h2>Un ultimo consiglio prima di iniziare</h2>
+  <p>Molti principianti cercano prima la strategia "giusta". In realtà, il fattore che fa la differenza più spesso è un altro: la gestione del rischio — di cui parliamo nel capitolo dedicato. Prima di aprire una posizione reale, prenditi il tempo di capire quanto sei disposto a perdere, non solo quanto vorresti guadagnare.</p>
+
+  <div class="ask-ai">
+    <h3>C'è qualcosa che non ti è chiaro?</h3>
+    <p>Chiedi all'assistente di rispiegartelo con parole diverse, o con un esempio pratico.</p>
+    <a class="cta-gold" href="chat.html?q=Puoi%20rispiegarmi%20in%20modo%20semplice%20le%20basi%20del%20trading%3F">Chiedi all'assistente →</a>
+  </div>
+
+  <div class="chapter-nav">
+    <a href="school.html">← Torna all'indice</a>
+    <a href="school-forex.html">Capitolo 2: Il Forex →</a>
+  </div>
+
+</article>
+
+<footer>Meridian — versione dimostrativa.</footer>
+
+</body>
+</html>

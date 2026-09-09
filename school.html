@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scuola del Trading — Meridian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000; --panel:#0A0A0A; --panel-2:#111111; --border:#232323;
+    --text:#F2F2F2; --muted:#8A8A8A; --gold:#D4A93E; --up:#4CAF7D; --down:#E0616B;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+
+  header{border-bottom:1px solid var(--border);padding:22px 0;text-align:center;}
+  .logo{font-size:20px;font-weight:700;margin-bottom:10px;}
+  .logo em{font-style:normal;color:var(--gold);}
+  header a.back{font-size:13px;color:var(--muted);text-decoration:none;}
+  header a.back:hover{color:var(--text);}
+
+  .school-hero{padding:64px 0 48px;text-align:center;border-bottom:1px solid var(--border);}
+  .school-hero h1{font-size:clamp(30px,4.4vw,44px);font-weight:700;margin:0 0 14px;letter-spacing:-0.5px;}
+  .school-hero p{color:var(--muted);font-size:16px;max-width:520px;margin:0 auto;}
+
+  main{padding:56px 0 80px;}
+  .chapters-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
+  .chapter-card{background:var(--panel);padding:32px;display:flex;flex-direction:column;gap:16px;text-decoration:none;transition:background 0.15s ease;}
+  .chapter-card:hover{background:var(--panel-2);}
+  .chapter-card .num{font-size:12px;color:var(--gold);letter-spacing:1px;}
+  .chapter-card h3{font-size:19px;font-weight:700;margin:0;}
+  .chapter-card p{color:var(--muted);font-size:14px;margin:0;flex:1;}
+  .chapter-card .go{font-size:13px;color:var(--gold);font-weight:600;}
+  .chapter-card.disabled{opacity:0.4;pointer-events:none;}
+
+  .school-cta{margin-top:56px;border:1px solid var(--border);background:var(--panel);padding:36px;text-align:center;}
+  .school-cta h2{font-size:20px;font-weight:700;margin:0 0 8px;}
+  .school-cta p{color:var(--muted);font-size:14.5px;margin:0 0 20px;}
+  .cta-gold{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--gold);color:#1A1405;font-weight:700;font-size:14.5px;
+    padding:12px 22px;text-decoration:none;border-radius:2px;border:1px solid var(--gold);
+  }
+  .cta-gold:hover{background:#C79A34;}
+
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Meridian<em>.</em></div>
+    <a class="back" href="index.html">← Torna alla home</a>
+  </div>
+</header>
+
+<section class="school-hero">
+  <div class="wrap">
+    <h1>Scuola del Trading</h1>
+    <p>Le basi dei mercati finanziari, spiegate in modo semplice e diviso per argomenti. Comincia da dove preferisci.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="chapters-grid">
+
+      <a class="chapter-card" href="school-basi.html">
+        <div class="num">CAPITOLO 01</div>
+        <svg width="40" height="40" viewBox="0 0 40 40"><rect x="4" y="22" width="6" height="14" fill="#4CAF7D"/><rect x="14" y="14" width="6" height="22" fill="#D4A93E"/><rect x="24" y="18" width="6" height="18" fill="#4CAF7D"/><rect x="34" y="6" width="2" height="30" fill="#232323"/></svg>
+        <h3>Le basi del trading</h3>
+        <p>Cosa significa comprare e vendere sui mercati, che tipi di mercati esistono, e il vocabolario essenziale per orientarti.</p>
+        <span class="go">Inizia il capitolo →</span>
+      </a>
+
+      <a class="chapter-card" href="school-forex.html">
+        <div class="num">CAPITOLO 02</div>
+        <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#D4A93E" stroke-width="2"/><path d="M20 4 A16 16 0 0 1 20 36" fill="none" stroke="#4CAF7D" stroke-width="2"/></svg>
+        <h3>Il mercato Forex</h3>
+        <p>Come funziona il mercato delle valute, cosa sono le coppie di cambio, e chi sono i protagonisti che lo muovono.</p>
+        <span class="go">Inizia il capitolo →</span>
+      </a>
+
+      <a class="chapter-card" href="school-rischio.html">
+        <div class="num">CAPITOLO 03</div>
+        <svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 4 L34 10 V20 C34 30 28 35 20 37 C12 35 6 30 6 20 V10 Z" fill="none" stroke="#D4A93E" stroke-width="2"/></svg>
+        <h3>Gestione del rischio</h3>
+        <p>La parte più sottovalutata e più importante del trading: come proteggere il capitale prima ancora di pensare al guadagno.</p>
+        <span class="go">Inizia il capitolo →</span>
+      </a>
+
+      <div class="chapter-card disabled">
+        <div class="num">CAPITOLO 04</div>
+        <h3>Analisi tecnica</h3>
+        <p>In arrivo: grafici, candele giapponesi e indicatori.</p>
+      </div>
+
+      <div class="chapter-card disabled">
+        <div class="num">CAPITOLO 05</div>
+        <h3>Analisi fondamentale</h3>
+        <p>In arrivo: bilanci, tassi d'interesse e dati macroeconomici.</p>
+      </div>
+
+      <div class="chapter-card disabled">
+        <div class="num">CAPITOLO 06</div>
+        <h3>Criptovalute</h3>
+        <p>In arrivo: come funziona una blockchain e cosa la differenzia da un'azione.</p>
+      </div>
+
+    </div>
+
+    <div class="school-cta">
+      <h2>Non hai capito qualcosa lungo il percorso?</h2>
+      <p>In ogni capitolo trovi un pulsante per chiedere spiegazioni all'assistente Meridian.</p>
+      <a class="cta-gold" href="chat.html">Apri l'assistente →</a>
+    </div>
+  </div>
+</main>
+
+<footer>Meridian — versione dimostrativa.</footer>
+
+</body>
+</html>
