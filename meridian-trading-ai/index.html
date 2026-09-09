@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — Il mercato, spiegato ogni mattina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14;
+    --panel:#12171F;
+    --panel-2:#161C25;
+    --border:#232B36;
+    --text:#EDEFF2;
+    --muted:#8A93A3;
+    --gold:#D4A93E;
+    --gold-dim:#8C742C;
+    --up:#4CAF7D;
+    --down:#E0616B;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--border);
+    padding:20px 0;
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .logo{
+    font-family:'Newsreader',serif;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:0.2px;
+  }
+  .logo em{font-style:italic;color:var(--gold);}
+  nav{display:flex;gap:28px;font-size:14px;color:var(--muted);}
+  nav a{text-decoration:none;}
+  nav a:hover{color:var(--text);}
+
+  /* Hero */
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--border);}
+  .hero h1{
+    font-family:'Newsreader',serif;
+    font-weight:400;
+    font-size:clamp(34px,5vw,54px);
+    line-height:1.1;
+    max-width:720px;
+    margin:0 0 18px;
+  }
+  .hero h1 i{font-style:italic;color:var(--gold);}
+  .hero p{
+    color:var(--muted);
+    font-size:17px;
+    max-width:520px;
+    margin:0 0 28px;
+  }
+  .cta{
+    display:inline-block;
+    background:var(--gold);
+    color:#1A1405;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 22px;
+    text-decoration:none;
+    border:1px solid var(--gold);
+  }
+  .cta:hover{background:#C79A34;}
+
+  /* Ticker */
+  .ticker-strip{
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+    overflow-x:auto;
+  }
+  .ticker-row{
+    display:flex;
+    gap:0;
+    min-width:max-content;
+  }
+  .ticker-item{
+    padding:16px 26px;
+    border-right:1px solid var(--border);
+    min-width:150px;
+  }
+  .ticker-item .sym{font-size:12px;color:var(--muted);margin-bottom:6px;}
+  .ticker-item .price{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:17px;
+  }
+  .ticker-item .chg{font-family:'IBM Plex Mono',monospace;font-size:13px;margin-left:8px;}
+  .up{color:var(--up);}
+  .down{color:var(--down);}
+
+  /* Main layout */
+  main{padding:48px 0 80px;}
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 420px;
+    gap:40px;
+    align-items:start;
+  }
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr;}
+  }
+
+  .section-title{
+    font-family:'Newsreader',serif;
+    font-size:22px;
+    font-weight:500;
+    margin:0 0 20px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--border);
+  }
+
+  /* News list */
+  .news-item{
+    padding:20px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .news-item:first-child{padding-top:0;}
+  .news-meta{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .news-meta .tag{color:var(--gold);}
+  .news-item h3{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:19px;
+    margin:0 0 8px;
+  }
+  .news-item p{color:var(--muted);font-size:14.5px;margin:0;}
+  #news-status{color:var(--muted);font-size:14px;}
+
+  /* Chat panel */
+  .chat-panel{
+    position:sticky;
+    top:24px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    height:640px;
+  }
+  .chat-head{
+    padding:16px 18px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--up);}
+  .chat-head span{font-size:13px;color:var(--muted);}
+  .chat-head strong{font-family:'Newsreader',serif;font-weight:500;font-size:16px;}
+
+  .chat-body{
+    flex:1;
+    overflow-y:auto;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .msg{max-width:88%;font-size:14.5px;padding:10px 13px;}
+  .msg.bot{
+    align-self:flex-start;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+  }
+  .msg.user{
+    align-self:flex-end;
+    background:#1D2530;
+    border:1px solid var(--gold-dim);
+  }
+  .msg.bot::before{
+    content:"Meridian";
+    display:block;
+    font-size:10px;
+    letter-spacing:0.4px;
+    color:var(--gold);
+    margin-bottom:4px;
+  }
+
+  .chat-input-row{
+    border-top:1px solid var(--border);
+    padding:14px;
+    display:flex;
+    gap:10px;
+  }
+  .chat-input-row textarea{
+    flex:1;
+    resize:none;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:10px 12px;
+    height:44px;
+  }
+  .chat-input-row textarea:focus{outline:1px solid var(--gold);}
+  .send-btn{
+    background:var(--gold);
+    border:1px solid var(--gold);
+    color:#1A1405;
+    font-weight:600;
+    font-size:13px;
+    padding:0 18px;
+    cursor:pointer;
+  }
+  .send-btn:hover{background:#C79A34;}
+  .send-btn:disabled{opacity:0.5;cursor:default;}
+
+  .disclaimer{
+    font-size:11.5px;
+    color:var(--muted);
+    padding:10px 18px;
+    border-top:1px solid var(--border);
+  }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 0;
+    color:var(--muted);
+    font-size:13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Meridian<em>.</em></div>
+    <nav>
+      <a href="#mercati">Mercati</a>
+      <a href="#notizie">Notizie</a>
+      <a href="#chat">Assistente</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Il mercato, <i>spiegato</i><br>ogni mattina.</h1>
+    <p>Notizie, andamenti e un assistente AI con cui ragionare — prima che apra la giornata di trading.</p>
+    <a class="cta" href="#chat">Fai una domanda all'assistente</a>
+  </div>
+</section>
+
+<div class="ticker-strip" id="ticker-strip">
+  <div class="wrap">
+    <div class="ticker-row" id="ticker-row">
+      <div class="ticker-item"><div class="sym">Caricamento dati di mercato…</div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap grid">
+
+    <section id="notizie">
+      <h2 class="section-title">Notizie di oggi</h2>
+      <div id="news-list">
+        <div id="news-status">Caricamento notizie…</div>
+      </div>
+    </section>
+
+    <section class="chat-panel" id="chat">
+      <div class="chat-head">
+        <div class="dot"></div>
+        <div>
+          <strong>Assistente Meridian</strong><br>
+          <span>Chiedi del mercato, di un titolo, di una notizia</span>
+        </div>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg bot">Ciao. Posso aiutarti a interpretare le notizie di oggi o l'andamento di un mercato. Cosa vuoi capire?</div>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chat-input" placeholder="Es: perché sta salendo il petrolio oggi?"></textarea>
+        <button class="send-btn" id="send-btn">Invia</button>
+      </div>
+      <div class="disclaimer">Meridian fornisce informazione generale, non consulenza finanziaria personalizzata.</div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Meridian — versione dimostrativa.</div>
+</footer>
+
+<script>
+// ---------- Market ticker ----------
+async function loadMarket(){
+  const row = document.getElementById('ticker-row');
+  try{
+    const res = await fetch('/api/market');
+    const data = await res.json();
+    row.innerHTML = data.items.map(it => `
+      <div class="ticker-item">
+        <div class="sym">${it.symbol}</div>
+        <span class="price">${it.price}</span>
+        <span class="chg ${it.changePct >= 0 ? 'up' : 'down'}">${it.changePct >= 0 ? '+' : ''}${it.changePct.toFixed(2)}%</span>
+      </div>
+    `).join('');
+  }catch(e){
+    row.innerHTML = '<div class="ticker-item"><div class="sym">Dati di mercato non disponibili al momento.</div></div>';
+  }
+}
+
+// ---------- News ----------
+async function loadNews(){
+  const list = document.getElementById('news-list');
+  try{
+    const res = await fetch('/api/market');
+    const data = await res.json();
+    if(!data.news || data.news.length === 0){
+      list.innerHTML = '<div id="news-status">Nessuna notizia disponibile al momento.</div>';
+      return;
+    }
+    list.innerHTML = data.news.map(n => `
+      <div class="news-item">
+        <div class="news-meta"><span class="tag">${n.source}</span> · ${n.time}</div>
+        <h3>${n.title}</h3>
+        <p>${n.summary}</p>
+      </div>
+    `).join('');
+  }catch(e){
+    list.innerHTML = '<div id="news-status">Non riesco a caricare le notizie in questo momento.</div>';
+  }
+}
+
+// ---------- Chat ----------
+const chatBody = document.getElementById('chat-body');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+let history = [];
+
+function addMessage(text, role){
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  div.textContent = text;
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+async function sendMessage(){
+  const text = chatInput.value.trim();
+  if(!text) return;
+  addMessage(text, 'user');
+  history.push({role:'user', content:text});
+  chatInput.value = '';
+  sendBtn.disabled = true;
+
+  const thinking = document.createElement('div');
+  thinking.className = 'msg bot';
+  thinking.textContent = '…';
+  chatBody.appendChild(thinking);
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  try{
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({messages: history})
+    });
+    const data = await res.json();
+    thinking.remove();
+    const reply = data.reply || 'Non sono riuscito a rispondere, riprova tra poco.';
+    addMessage(reply, 'bot');
+    history.push({role:'assistant', content:reply});
+  }catch(e){
+    thinking.remove();
+    addMessage('Errore di connessione. Riprova tra poco.', 'bot');
+  }finally{
+    sendBtn.disabled = false;
+  }
+}
+
+sendBtn.addEventListener('click', sendMessage);
+chatInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+loadMarket();
+loadNews();
+</script>
+
+</body>
+</html>
