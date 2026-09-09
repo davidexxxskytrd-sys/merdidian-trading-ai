@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candele giapponesi — Scuola del Trading — Meridian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#000000;--panel:#0A0A0A;--panel-2:#111111;--border:#232323;--text:#F2F2F2;--muted:#8A8A8A;--gold:#D4A93E;--up:#4CAF7D;--down:#E0616B;}
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65;}
+  a{color:var(--gold);}
+  .wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--border);padding:22px 0;text-align:center;}
+  .logo{font-size:20px;font-weight:700;margin-bottom:10px;}
+  .logo em{font-style:normal;color:var(--gold);}
+  header a.back{font-size:13px;color:var(--muted);text-decoration:none;}
+  header a.back:hover{color:var(--text);}
+  .chapter-hero{padding:56px 0 40px;text-align:center;border-bottom:1px solid var(--border);}
+  .chapter-hero .num{font-size:12px;color:var(--gold);letter-spacing:1.5px;margin-bottom:14px;}
+  .chapter-hero h1{font-size:clamp(28px,4vw,40px);font-weight:700;margin:0 0 14px;letter-spacing:-0.5px;}
+  .chapter-hero p{color:var(--muted);font-size:15.5px;max-width:480px;margin:0 auto;}
+  article{padding:52px 0;}
+  article h2{font-size:21px;font-weight:700;margin:44px 0 14px;display:flex;align-items:center;gap:10px;}
+  article h2:first-child{margin-top:0;}
+  article p{color:#D8D8D8;font-size:15.5px;margin:0 0 16px;}
+  article ul{color:#D8D8D8;font-size:15.5px;padding-left:20px;margin:0 0 16px;}
+  article li{margin-bottom:8px;}
+  .callout{border-left:2px solid var(--gold);background:var(--panel);padding:16px 20px;margin:22px 0;font-size:14.5px;color:var(--muted);}
+  .callout strong{color:var(--text);}
+  .candle-demo{display:flex;gap:20px;justify-content:center;margin:26px 0;flex-wrap:wrap;}
+  .candle-box{text-align:center;font-size:12px;color:var(--muted);}
+  .sticker{display:flex;justify-content:center;margin:38px 0;}
+  .ask-ai{margin-top:52px;border:1px solid var(--border);background:var(--panel);padding:30px;text-align:center;}
+  .ask-ai h3{font-size:17px;margin:0 0 8px;font-weight:700;}
+  .ask-ai p{color:var(--muted);font-size:14px;margin:0 0 18px;}
+  .cta-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1A1405;font-weight:700;font-size:14px;padding:11px 20px;text-decoration:none;border-radius:2px;border:1px solid var(--gold);}
+  .cta-gold:hover{background:#C79A34;}
+  .chapter-nav{display:flex;justify-content:space-between;margin-top:36px;font-size:14px;}
+  .chapter-nav a{text-decoration:none;}
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;margin-top:40px;}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo">Meridian<em>.</em></div><a class="back" href="school.html">← Scuola del Trading</a></div></header>
+<section class="chapter-hero"><div class="wrap"><div class="num">CAPITOLO 04</div><h1>Le candele giapponesi</h1><p>Il modo più diffuso di leggere un grafico dei prezzi, nato in Giappone secoli fa per il commercio del riso.</p></div></section>
+
+<article class="wrap">
+
+  <h2>🕯️ Cos'è una candela</h2>
+  <p>Ogni candela racconta cosa è successo al prezzo in un certo intervallo di tempo (un minuto, un'ora, un giorno: dipende dal grafico che scegli). Mostra quattro informazioni: il prezzo di <strong>apertura</strong>, quello di <strong>chiusura</strong>, il <strong>massimo</strong> e il <strong>minimo</strong> raggiunti in quel periodo.</p>
+  <div class="candle-demo">
+    <div class="candle-box"><svg width="36" height="80" viewBox="0 0 36 80"><line x1="18" y1="5" x2="18" y2="75" stroke="#4CAF7D" stroke-width="2"/><rect x="9" y="22" width="18" height="36" fill="#4CAF7D"/></svg>Rialzista</div>
+    <div class="candle-box"><svg width="36" height="80" viewBox="0 0 36 80"><line x1="18" y1="5" x2="18" y2="75" stroke="#E0616B" stroke-width="2"/><rect x="9" y="22" width="18" height="36" fill="#E0616B"/></svg>Ribassista</div>
+    <div class="candle-box"><svg width="36" height="80" viewBox="0 0 36 80"><line x1="18" y1="8" x2="18" y2="72" stroke="#8A8A8A" stroke-width="2"/><rect x="9" y="38" width="18" height="4" fill="#8A8A8A"/></svg>Doji</div>
+  </div>
+  <p>Il "corpo" della candela (il rettangolo) mostra la distanza tra apertura e chiusura. Le "ombre" o "stoppini" (le linee sottili sopra e sotto) mostrano quanto il prezzo si è spinto oltre, prima di tornare indietro.</p>
+
+  <h2>🎨 Candela rialzista o ribassista</h2>
+  <p>Per convenzione, una candela è <strong>rialzista</strong> (spesso verde) quando il prezzo di chiusura è più alto di quello di apertura: il periodo si è chiuso "in guadagno". È <strong>ribassista</strong> (spesso rossa) quando succede il contrario.</p>
+
+  <div class="sticker">
+    <svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0A0A0A" stroke="#232323" stroke-width="1"/><line x1="20" y1="16" x2="20" y2="48" stroke="#4CAF7D" stroke-width="2"/><rect x="14" y="26" width="12" height="16" fill="#4CAF7D"/><line x1="44" y1="16" x2="44" y2="48" stroke="#E0616B" stroke-width="2"/><rect x="38" y="22" width="12" height="14" fill="#E0616B"/></svg>
+  </div>
+
+  <h2>📚 I pattern più citati</h2>
+  <p>Nel tempo, i trader hanno dato nomi a configurazioni di candele che si ripetono spesso.</p>
+  <ul>
+    <li><strong>Doji</strong> — una candela con corpo minuscolo o assente: apertura e chiusura quasi identiche. Indica indecisione tra chi compra e chi vende.</li>
+    <li><strong>Martello</strong> — corpo piccolo in alto e un'ombra lunga verso il basso. Spesso citato come possibile segnale di inversione dopo un ribasso.</li>
+    <li><strong>Stella cadente</strong> — l'opposto del martello: corpo piccolo in basso e ombra lunga verso l'alto, spesso citata dopo un rialzo prolungato.</li>
+    <li><strong>Engulfing (candela avvolgente)</strong> — una candela il cui corpo "avvolge" completamente quello della candela precedente, spesso letta come un cambio di forza tra compratori e venditori.</li>
+    <li><strong>Harami</strong> — l'opposto dell'engulfing: una candela piccola contenuta interamente nel corpo di quella precedente, spesso associata a una pausa nel movimento in corso.</li>
+  </ul>
+  <div class="callout"><strong>Attenzione:</strong> questi pattern sono osservazioni statistiche popolari tra i trader, non regole matematiche garantite. Vanno sempre letti nel contesto generale del grafico, non isolatamente.</div>
+
+  <h2>🔄 Pattern di continuazione e di inversione</h2>
+  <p>È utile distinguere tra pattern che i trader interpretano come segnale di <strong>inversione</strong> del trend in corso (come martello e stella cadente) e quelli letti come segnale di <strong>continuazione</strong> — cioè che il trend esistente proseguirà nella stessa direzione. Nessuna candela, da sola, dovrebbe mai essere l'unica ragione per aprire una posizione: il contesto (dove si trova il prezzo rispetto a supporti, resistenze e trend generale) conta quanto, se non di più, della singola candela.</p>
+
+  <h2>🧩 Perché servono</h2>
+  <p>Le candele da sole non "predicono" il futuro: sono un modo compatto per vedere rapidamente la storia recente del prezzo e la forza relativa tra chi compra e chi vende. Diventano più utili se lette insieme ad altri strumenti, come i supporti e le resistenze che vediamo nel prossimo capitolo.</p>
+
+  <div class="ask-ai">
+    <h3>C'è qualcosa che non ti è chiaro?</h3>
+    <p>Chiedi all'assistente di farti altri esempi di pattern di candele.</p>
+    <a class="cta-gold" href="chat.html?q=Puoi%20spiegarmi%20altri%20pattern%20di%20candele%20giapponesi%20oltre%20a%20doji%2C%20martello%20ed%20engulfing%3F">Chiedi all'assistente →</a>
+  </div>
+
+  <div class="chapter-nav">
+    <a href="school-rischio.html">← Capitolo 3: Gestione del rischio</a>
+    <a href="school-supporti-resistenze.html">Capitolo 5: Supporti e resistenze →</a>
+  </div>
+
+</article>
+<footer>Meridian — versione dimostrativa.</footer>
+</body>
+</html>
