@@ -36,7 +36,7 @@ Se non hai informazioni aggiornate su un evento specifico, dillo onestamente inv
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
+        model: 'claude-sonnet-5',
         max_tokens: 600,
         system: systemPrompt,
         messages: recent
@@ -47,8 +47,11 @@ Se non hai informazioni aggiornate su un evento specifico, dillo onestamente inv
 
     if (data.error) {
       console.error('Anthropic API error:', data.error);
+      // NOTA TEMPORANEA PER IL DEBUG: mostriamo il dettaglio dell'errore
+      // direttamente in chat, così è più facile capire cosa non va.
+      // Una volta che tutto funziona, si può togliere questa parte.
       return res.status(200).json({
-        reply: "L'assistente non è riuscito a rispondere in questo momento. Riprova tra poco."
+        reply: `L'assistente non è riuscito a rispondere. Dettaglio errore: ${data.error.type || ''} — ${data.error.message || 'sconosciuto'}`
       });
     }
 
