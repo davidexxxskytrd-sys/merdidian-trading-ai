@@ -205,19 +205,78 @@
   .news-item p{color:var(--muted);font-size:14.5px;margin:0;}
   #news-status{color:var(--muted);font-size:14px;}
 
-  /* Callout assistente */
-  .assistant-callout{
+  /* Riga: accesso AI + notizie affiancati */
+  .combo-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--border);
     border:1px solid var(--border);
-    padding:36px;
-    text-align:center;
+    margin-bottom:52px;
+  }
+  @media (max-width:760px){
+    .combo-row{grid-template-columns:1fr;}
+  }
+
+  /* Riquadro AI, in evidenza */
+  .ai-access-card{
+    background:linear-gradient(160deg, #14110A 0%, var(--panel) 60%);
+    padding:38px 34px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-left:2px solid var(--gold);
+  }
+  .ai-access-card .dot-live{width:7px;height:7px;border-radius:50%;background:var(--up);display:inline-block;margin-right:8px;}
+  .ai-access-card .eyebrow{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
+  .ai-access-card h2{font-size:24px;font-weight:700;margin:0 0 10px;line-height:1.25;}
+  .ai-access-card p{color:var(--muted);font-size:14.5px;margin:0 0 22px;max-width:340px;}
+  .cta-gold{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--gold);color:#1A1405;font-weight:700;font-size:14.5px;
+    padding:13px 22px;text-decoration:none;width:fit-content;border-radius:2px;
+    border:1px solid var(--gold);
+  }
+  .cta-gold:hover{background:#C79A34;}
+
+  /* Box notizie, compatto e scorrevole */
+  .news-box{
     background:var(--panel);
+    padding:26px 26px 10px;
+    display:flex;
+    flex-direction:column;
   }
-  .assistant-callout .dot-live{
-    width:7px;height:7px;border-radius:50%;background:var(--up);
-    display:inline-block;margin-right:8px;
+  .news-box .section-title{font-size:15px;}
+  .news-box .section-sub{font-size:12px;}
+  .news-box .section-head{margin-bottom:14px;padding-bottom:12px;}
+  .news-scroll{
+    overflow-y:auto;
+    max-height:320px;
+    padding-right:6px;
   }
-  .assistant-callout h2{font-size:22px;margin:0 0 10px;font-weight:700;}
-  .assistant-callout p{color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 22px;}
+  .news-scroll .news-item{padding:14px 0;}
+  .news-scroll .news-item h3{font-size:14.5px;}
+  .news-scroll .news-item p{font-size:13px;}
+  .news-scroll::-webkit-scrollbar{width:5px;}
+  .news-scroll::-webkit-scrollbar-thumb{background:var(--border);}
+
+  /* Scuola del Trading */
+  .school-banner{
+    border:1px solid var(--border);
+    background:var(--panel);
+    padding:44px;
+    display:grid;
+    grid-template-columns:120px 1fr auto;
+    align-items:center;
+    gap:32px;
+    margin-bottom:52px;
+  }
+  @media (max-width:700px){
+    .school-banner{grid-template-columns:1fr;text-align:center;}
+    .school-banner svg{margin:0 auto;}
+  }
+  .school-banner h2{font-size:23px;font-weight:700;margin:0 0 8px;}
+  .school-banner p{color:var(--muted);font-size:14.5px;margin:0;max-width:440px;}
 
   footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;}
 
@@ -234,6 +293,7 @@
     <nav>
       <a href="#strumenti">Mercati</a>
       <a href="#notizie">Notizie</a>
+      <a href="school.html">Scuola del Trading</a>
       <a href="chat.html" class="assistant-link">Assistente →</a>
     </nav>
   </div>
@@ -263,29 +323,47 @@
       </div>
     </section>
 
-    <section class="news-section" id="notizie">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">Notizie di oggi</h2>
-          <div class="section-sub">Quello che sta muovendo l'economia globale</div>
+    <div class="combo-row" id="notizie">
+      <div class="ai-access-card">
+        <div><span class="dot-live"></span><span class="eyebrow">Assistente online</span></div>
+        <h2>Hai una domanda sul mercato?</h2>
+        <p>Chiedi all'assistente Meridian di spiegarti una notizia, un andamento, o il contesto dietro un movimento di prezzo.</p>
+        <a class="cta-gold" href="chat.html">Apri l'assistente →</a>
+      </div>
+      <div class="news-box">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Notizie di oggi</h2>
+            <div class="section-sub">Quello che muove l'economia globale</div>
+          </div>
+        </div>
+        <div class="news-scroll" id="news-list">
+          <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
         </div>
       </div>
-      <div id="news-list">
-        <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
-      </div>
-    </section>
+    </div>
 
-    <section class="assistant-callout">
-      <div><span class="dot-live"></span><span style="font-size:13px;color:var(--muted);">Assistente online</span></div>
-      <h2>Hai una domanda sul mercato?</h2>
-      <p>Chiedi all'assistente Meridian di spiegarti una notizia, un andamento, o il contesto dietro un movimento di prezzo.</p>
-      <a class="cta" href="chat.html">Apri l'assistente</a>
-    </section>
+    <a href="school.html" style="text-decoration:none;color:inherit;">
+      <div class="school-banner">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+          <rect x="10" y="55" width="14" height="30" fill="#4CAF7D"/>
+          <rect x="30" y="35" width="14" height="50" fill="#D4A93E"/>
+          <rect x="50" y="45" width="14" height="40" fill="#4CAF7D"/>
+          <rect x="70" y="20" width="14" height="65" fill="#D4A93E"/>
+        </svg>
+        <div>
+          <h2>Scuola del Trading</h2>
+          <p>Impara le basi del trading, del forex e dell'economia finanziaria, capitolo dopo capitolo — con l'assistente sempre pronto a spiegarti ciò che non capisci.</p>
+        </div>
+        <span class="cta-gold">Inizia a imparare →</span>
+      </div>
+    </a>
 
   </div>
 </main>
 
 <footer>Meridian — versione dimostrativa.</footer>
+
 
 <!-- Modal dettaglio strumento -->
 <div class="modal-overlay" id="detail-modal">
