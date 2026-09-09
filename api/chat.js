@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   // d'ambiente GEMINI_MODEL su Vercel. Se in futuro questo modello non
   // fosse più disponibile, controlla l'elenco aggiornato qui:
   // https://ai.google.dev/gemini-api/docs/models
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const model = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
 
   try {
     const { messages } = req.body;
