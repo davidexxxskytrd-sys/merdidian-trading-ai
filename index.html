@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meridian — Il mercato, spiegato ogni mattina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#000000;
@@ -15,161 +15,230 @@
     --border-soft:#1A1A1A;
     --text:#F2F2F2;
     --muted:#8A8A8A;
-    --gold:#D4A93E;
-    --gold-dim:#8C742C;
+    --accent:#57B8FF;
+    --accent-dim:#2E6E99;
+    --accent-text:#061019;
     --up:#4CAF7D;
     --down:#E0616B;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.55;
-  }
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.55;position:relative;}
   a{color:inherit;}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
   button{font-family:inherit;}
 
-  /* Header — centrato */
-  header{
-    border-bottom:1px solid var(--border);
-    padding:26px 0 20px;
-    text-align:center;
+  /* Sfondo animato + texture a griglia */
+  .bg-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;}
+  .bg-fx::before{content:'';position:absolute;width:55vw;height:55vw;border-radius:50%;background:radial-gradient(circle, rgba(87,184,255,0.16), transparent 70%);top:-18%;left:-12%;filter:blur(10px);animation:drift1 24s ease-in-out infinite alternate;}
+  .bg-fx::after{content:'';position:absolute;width:48vw;height:48vw;border-radius:50%;background:radial-gradient(circle, rgba(76,175,125,0.09), transparent 70%);bottom:-16%;right:-10%;filter:blur(10px);animation:drift2 28s ease-in-out infinite alternate;}
+  .bg-grid{position:fixed;inset:0;z-index:-1;
+    background-image:linear-gradient(rgba(87,184,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(87,184,255,0.05) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   }
-  .logo{
-    font-size:22px;
-    font-weight:700;
-    letter-spacing:0.2px;
-    margin-bottom:12px;
+  @keyframes drift1{from{transform:translate(0,0);}to{transform:translate(6%,8%);}}
+  @keyframes drift2{from{transform:translate(0,0);}to{transform:translate(-7%,-6%);}}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .pulse-dot{position:relative;}
+  .pulse-dot::after{
+    content:'';position:absolute;inset:0;border-radius:50%;
+    background:inherit;animation:pulseRing 1.8s ease-out infinite;
   }
-  .logo em{font-style:normal;color:var(--gold);}
-  nav{display:flex;gap:26px;font-size:14px;color:var(--muted);justify-content:center;}
-  nav a{text-decoration:none;}
+  @keyframes pulseRing{0%{opacity:0.7;transform:scale(1);}100%{opacity:0;transform:scale(2.6);}}
+
+  /* Header */
+  header{border-bottom:1px solid var(--border);padding:18px 0 14px;text-align:center;}
+  .logo{font-size:19px;font-weight:700;letter-spacing:0.2px;margin-bottom:8px;}
+  .logo em{font-style:normal;color:var(--accent);}
+  nav{display:flex;gap:22px;font-size:13.5px;color:var(--muted);justify-content:center;}
+  nav a{text-decoration:none;transition:color 0.15s ease;}
   nav a:hover{color:var(--text);}
-  nav a.assistant-link{color:var(--gold);}
+  nav a.assistant-link{color:var(--accent);}
 
-  /* Hero */
-  .hero{padding:56px 0 40px;border-bottom:1px solid var(--border);text-align:center;}
-  .hero h1{
-    font-weight:700;
-    font-size:clamp(30px,4.4vw,46px);
-    line-height:1.18;
-    letter-spacing:-0.5px;
-    max-width:640px;
-    margin:0 auto 16px;
+  /* Wordmark hero con shimmer */
+  .hero-main{text-align:center;padding:38px 0 6px;}
+  .hero-main h1{
+    font-size:clamp(38px,6.5vw,58px);
+    font-weight:800;
+    letter-spacing:-1.5px;
+    margin:0;
+    line-height:1;
+    background:linear-gradient(100deg, #F2F2F2 30%, #57B8FF 45%, #F2F2F2 60%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shimmer 5s ease-in-out infinite;
   }
-  .hero p{
-    color:var(--muted);
-    font-size:16.5px;
-    max-width:480px;
-    margin:0 auto 26px;
+  @keyframes shimmer{
+    0%{background-position:120% 0;}
+    50%{background-position:0% 0;}
+    100%{background-position:-120% 0;}
   }
-  .cta{
-    display:inline-block;
-    background:var(--gold);
-    color:#1A1405;
-    font-weight:600;
-    font-size:14px;
-    padding:12px 22px;
-    text-decoration:none;
-    border:1px solid var(--gold);
-    border-radius:2px;
+  .hero-main h1 em{font-style:normal;}
+  .hero-main p{color:var(--muted);font-size:14.5px;margin:10px 0 0;letter-spacing:0.3px;}
+  .live-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:14px;padding:6px 14px;
+    border:1px solid var(--border);border-radius:20px;
+    font-size:12px;color:var(--muted);
   }
-  .cta:hover{background:#C79A34;}
+  .live-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--up);}
 
-  main{padding:52px 0 80px;}
-
-  .section-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding-bottom:16px;
+  /* Fascia di fiducia */
+  .trust-bar{
+    display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+    margin:22px 0 0;
+    border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
-    margin-bottom:22px;
   }
-  .section-title{font-size:18px;font-weight:600;margin:0;}
-  .section-sub{font-size:13px;color:var(--muted);margin-top:4px;}
-
-  .ghost-btn{
-    background:transparent;
-    border:1px solid var(--border);
-    color:var(--text);
-    font-size:13px;
-    padding:8px 14px;
-    cursor:pointer;
-    border-radius:2px;
+  .trust-item{
+    padding:16px 28px;text-align:center;flex:1;min-width:150px;
+    border-right:1px solid var(--border);
   }
-  .ghost-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .trust-item:last-child{border-right:none;}
+  .trust-item .t-num{font-size:19px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace;}
+  .trust-item .t-label{font-size:11.5px;color:var(--muted);margin-top:3px;}
 
-  /* Strumenti */
-  .instruments-section{padding-bottom:52px;margin-bottom:52px;border-bottom:1px solid var(--border);}
-  .instrument-grid{
+  main{padding:26px 0 56px;}
+
+  /* Riga a tre blocchi */
+  .feature-row{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));
+    grid-template-columns:1.1fr 0.85fr 1.1fr;
     gap:1px;
     background:var(--border);
     border:1px solid var(--border);
+    margin-bottom:24px;
   }
+  @media (max-width:880px){
+    .feature-row{grid-template-columns:1fr;}
+  }
+
+  /* Blocco sinistro: impara con l'AI */
+  .learn-card{
+    background:linear-gradient(150deg, #0A141C 0%, var(--panel) 65%);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-left:2px solid var(--accent);
+    transition:background 0.2s ease, box-shadow 0.25s ease;
+  }
+  .learn-card:hover{background:linear-gradient(150deg, #0C1822 0%, var(--panel-2) 65%);box-shadow:inset 0 0 40px rgba(87,184,255,0.08);}
+  .learn-card .icon{margin-bottom:14px;}
+  .learn-card h2{font-size:19px;font-weight:700;margin:0 0 8px;line-height:1.3;}
+  .learn-card p{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .cta-accent{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--accent);color:var(--accent-text);font-weight:700;font-size:12.5px;
+    padding:10px 16px;text-decoration:none;width:fit-content;border-radius:2px;
+    border:1px solid var(--accent);transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .cta-accent:hover{background:#7CC8FF;transform:translateY(-1px);}
+
+  /* Blocco centrale: accesso rapido */
+  .quicknav{background:var(--panel);padding:26px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;}
+  .quicknav-item{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 8px;
+    text-decoration:none;color:var(--text);
+    border-bottom:1px solid var(--border-soft);
+    transition:padding-left 0.15s ease, color 0.15s ease;
+  }
+  .quicknav-item:last-child{border-bottom:none;}
+  .quicknav-item:hover{padding-left:14px;color:var(--accent);}
+  .quicknav-item .qicon{font-size:18px;}
+  .quicknav-item .qlabel{font-weight:600;font-size:14.5px;flex:1;}
+  .quicknav-item .qarrow{font-size:13px;color:var(--muted);}
+
+  /* Blocco destro: strumenti + notizie */
+  .right-stack{background:var(--panel);display:flex;flex-direction:column;}
+  .rs-block{padding:18px 20px;}
+  .rs-block + .rs-block{border-top:1px solid var(--border);}
+  .rs-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .rs-head h3{font-size:13.5px;font-weight:700;margin:0;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);}
+  .ghost-btn{
+    background:transparent;border:1px solid var(--border);color:var(--text);
+    font-size:11.5px;padding:5px 10px;cursor:pointer;border-radius:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .ghost-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+  .instrument-list{display:flex;flex-direction:column;gap:1px;background:var(--border-soft);}
   .instrument-card{
-    background:var(--panel);
-    padding:20px 18px;
-    cursor:pointer;
-    transition:background 0.15s ease;
+    background:var(--panel);padding:9px 4px;cursor:pointer;
+    display:flex;align-items:center;gap:10px;transition:background 0.15s ease;
   }
   .instrument-card:hover{background:var(--panel-2);}
-  .instrument-card .name{font-size:13px;color:var(--muted);margin-bottom:10px;}
-  .instrument-card .sym{font-size:12px;color:var(--gold);letter-spacing:0.4px;margin-bottom:2px;}
-  .instrument-card .price{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:19px;
-    margin-bottom:6px;
-  }
-  .instrument-card .chg{font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .instrument-card .sym{font-size:11.5px;color:var(--accent);letter-spacing:0.4px;width:44px;}
+  .instrument-card .price{font-family:'IBM Plex Mono',monospace;font-size:13.5px;margin-left:auto;}
+  .instrument-card .chg{font-family:'IBM Plex Mono',monospace;font-size:11px;width:56px;text-align:right;}
   .up{color:var(--up);}
   .down{color:var(--down);}
-  #instruments-status{color:var(--muted);font-size:14px;padding:20px 0;}
+  #instruments-status{color:var(--muted);font-size:12.5px;padding:8px 4px;}
+
+  .news-scroll{overflow-y:auto;max-height:170px;padding-right:4px;}
+  .news-scroll::-webkit-scrollbar{width:5px;}
+  .news-scroll::-webkit-scrollbar-thumb{background:var(--border);}
+  .news-item{padding:10px 0;border-bottom:1px solid var(--border-soft);}
+  .news-item:first-child{padding-top:0;}
+  .news-meta{font-size:11px;color:var(--muted);margin-bottom:4px;}
+  .news-meta .tag{color:var(--accent);}
+  .news-item h4{font-weight:600;font-size:13px;margin:0 0 4px;}
+  .news-item p{color:var(--muted);font-size:12px;margin:0;}
+  #news-status{color:var(--muted);font-size:13px;}
 
   /* Loading dots */
-  .dots{display:inline-flex;gap:5px;align-items:center;padding:6px 0;}
-  .dots span{
-    width:6px;height:6px;border-radius:50%;
-    background:var(--gold);
-    animation:bounce 1.1s infinite ease-in-out;
-  }
+  .dots{display:inline-flex;gap:5px;align-items:center;padding:4px 0;}
+  .dots span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:bounce 1.1s infinite ease-in-out;}
   .dots span:nth-child(2){animation-delay:0.15s;}
   .dots span:nth-child(3){animation-delay:0.3s;}
-  @keyframes bounce{
-    0%, 80%, 100%{transform:translateY(0);opacity:0.5;}
-    40%{transform:translateY(-6px);opacity:1;}
+  @keyframes bounce{0%, 80%, 100%{transform:translateY(0);opacity:0.5;}40%{transform:translateY(-6px);opacity:1;}}
+
+  /* Carosello capitoli scuola */
+  .chapters-section{margin-bottom:8px;}
+  .chapters-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+  .chapters-head h2{font-size:16px;font-weight:700;margin:0;}
+  .chapters-head span{font-size:12.5px;color:var(--muted);}
+  .chapters-scroll{
+    display:flex;gap:14px;overflow-x:auto;padding:6px 4px 18px;
+    scroll-snap-type:x proximity;
   }
+  .chapters-scroll::-webkit-scrollbar{height:5px;}
+  .chapters-scroll::-webkit-scrollbar-thumb{background:var(--border);}
+  .chapter-bubble{
+    scroll-snap-align:start;
+    flex:0 0 auto;width:118px;text-align:center;text-decoration:none;color:var(--text);
+  }
+  .chapter-bubble .circle{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--panel);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 10px;font-size:24px;
+    transition:border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.25s ease;
+  }
+  .chapter-bubble:hover .circle{border-color:var(--accent);transform:translateY(-3px);background:var(--panel-2);box-shadow:0 6px 24px rgba(87,184,255,0.25);}
+  .chapter-bubble .clabel{font-size:12px;font-weight:600;line-height:1.3;}
+  .chapter-bubble .cnum{font-size:10px;color:var(--muted);margin-bottom:2px;letter-spacing:0.5px;}
+
+  footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font-size:12.5px;text-align:center;}
+  footer .credit{color:var(--muted);}
+  footer .credit em{font-style:normal;color:var(--accent);}
 
   /* Modal dettaglio strumento */
-  .modal-overlay{
-    display:none;
-    position:fixed;inset:0;
-    background:rgba(0,0,0,0.75);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:50;
-  }
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;padding:20px;z-index:50;}
   .modal-overlay.open{display:flex;}
-  .modal{
-    background:var(--panel);
-    border:1px solid var(--border);
-    max-width:520px;
-    width:100%;
-    padding:28px;
-    max-height:85vh;
-    overflow-y:auto;
-  }
+  .modal{background:var(--panel);border:1px solid var(--border);max-width:520px;width:100%;padding:28px;max-height:85vh;overflow-y:auto;}
   .modal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
   .modal-top h3{font-size:22px;margin:0;}
   .modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;}
   .modal-close:hover{color:var(--text);}
-  .modal-sym{color:var(--gold);font-size:13px;letter-spacing:0.4px;margin-bottom:18px;}
+  .modal-sym{color:var(--accent);font-size:13px;letter-spacing:0.4px;margin-bottom:18px;}
   .modal-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;}
   .modal-price{font-family:'IBM Plex Mono',monospace;font-size:28px;}
   .modal-chart{width:100%;height:80px;margin-bottom:18px;}
@@ -177,115 +246,22 @@
 
   /* Selettore strumenti */
   .picker-list{display:flex;flex-direction:column;gap:2px;margin:18px 0;}
-  .picker-item{
-    display:flex;align-items:center;gap:12px;
-    padding:11px 12px;
-    border:1px solid var(--border);
-    cursor:pointer;
-  }
-  .picker-item.selected{border-color:var(--gold);}
-  .picker-item input{accent-color:var(--gold);}
+  .picker-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--border);cursor:pointer;}
+  .picker-item.selected{border-color:var(--accent);}
+  .picker-item input{accent-color:var(--accent);}
   .picker-item .p-name{font-size:14px;}
   .picker-item .p-sym{font-size:12px;color:var(--muted);margin-left:auto;}
   .picker-note{font-size:12.5px;color:var(--muted);margin-bottom:4px;}
-  .picker-save{
-    background:var(--gold);border:1px solid var(--gold);color:#1A1405;
-    font-weight:600;font-size:14px;padding:10px 18px;cursor:pointer;width:100%;
-    border-radius:2px;
-  }
+  .picker-save{background:var(--accent);border:1px solid var(--accent);color:var(--accent-text);font-weight:600;font-size:14px;padding:10px 18px;cursor:pointer;width:100%;border-radius:2px;}
   .picker-save:disabled{opacity:0.4;cursor:default;}
 
-  /* Notizie */
-  .news-section{padding-bottom:52px;margin-bottom:52px;border-bottom:1px solid var(--border);}
-  .news-item{padding:20px 0;border-bottom:1px solid var(--border-soft);}
-  .news-item:first-child{padding-top:0;}
-  .news-meta{font-size:12px;color:var(--muted);margin-bottom:8px;}
-  .news-meta .tag{color:var(--gold);}
-  .news-item h3{font-weight:600;font-size:16.5px;margin:0 0 8px;}
-  .news-item p{color:var(--muted);font-size:14.5px;margin:0;}
-  #news-status{color:var(--muted);font-size:14px;}
-
-  /* Riga: accesso AI + notizie affiancati */
-  .combo-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1px;
-    background:var(--border);
-    border:1px solid var(--border);
-    margin-bottom:52px;
-  }
-  @media (max-width:760px){
-    .combo-row{grid-template-columns:1fr;}
-  }
-
-  /* Riquadro AI, in evidenza */
-  .ai-access-card{
-    background:linear-gradient(160deg, #14110A 0%, var(--panel) 60%);
-    padding:38px 34px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    border-left:2px solid var(--gold);
-  }
-  .ai-access-card .dot-live{width:7px;height:7px;border-radius:50%;background:var(--up);display:inline-block;margin-right:8px;}
-  .ai-access-card .eyebrow{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
-  .ai-access-card h2{font-size:24px;font-weight:700;margin:0 0 10px;line-height:1.25;}
-  .ai-access-card p{color:var(--muted);font-size:14.5px;margin:0 0 22px;max-width:340px;}
-  .cta-gold{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--gold);color:#1A1405;font-weight:700;font-size:14.5px;
-    padding:13px 22px;text-decoration:none;width:fit-content;border-radius:2px;
-    border:1px solid var(--gold);
-  }
-  .cta-gold:hover{background:#C79A34;}
-
-  /* Box notizie, compatto e scorrevole */
-  .news-box{
-    background:var(--panel);
-    padding:26px 26px 10px;
-    display:flex;
-    flex-direction:column;
-  }
-  .news-box .section-title{font-size:15px;}
-  .news-box .section-sub{font-size:12px;}
-  .news-box .section-head{margin-bottom:14px;padding-bottom:12px;}
-  .news-scroll{
-    overflow-y:auto;
-    max-height:320px;
-    padding-right:6px;
-  }
-  .news-scroll .news-item{padding:14px 0;}
-  .news-scroll .news-item h3{font-size:14.5px;}
-  .news-scroll .news-item p{font-size:13px;}
-  .news-scroll::-webkit-scrollbar{width:5px;}
-  .news-scroll::-webkit-scrollbar-thumb{background:var(--border);}
-
-  /* Scuola del Trading */
-  .school-banner{
-    border:1px solid var(--border);
-    background:var(--panel);
-    padding:44px;
-    display:grid;
-    grid-template-columns:120px 1fr auto;
-    align-items:center;
-    gap:32px;
-    margin-bottom:52px;
-  }
-  @media (max-width:700px){
-    .school-banner{grid-template-columns:1fr;text-align:center;}
-    .school-banner svg{margin:0 auto;}
-  }
-  .school-banner h2{font-size:23px;font-weight:700;margin:0 0 8px;}
-  .school-banner p{color:var(--muted);font-size:14.5px;margin:0;max-width:440px;}
-
-  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px;text-align:center;}
-
-  @media (max-width:640px){
-    nav{flex-wrap:wrap;gap:16px;}
-  }
+  @media (max-width:640px){nav{flex-wrap:wrap;gap:14px;}}
 </style>
 </head>
 <body>
+
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
 
 <header>
   <div class="wrap">
@@ -299,71 +275,86 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero-main reveal">
   <div class="wrap">
-    <h1>Il mercato, spiegato ogni mattina.</h1>
-    <p>Notizie e andamenti dei mercati che segui davvero — e un assistente AI pronto a spiegarteli.</p>
-    <a class="cta" href="chat.html">Fai una domanda all'assistente</a>
+    <h1>Meridian<em>.</em></h1>
+    <p>IL MERCATO, SPIEGATO OGNI MATTINA</p>
+    <div class="live-badge"><span class="dot pulse-dot"></span> Assistente e dati di mercato aggiornati in tempo reale</div>
   </div>
 </section>
+
+<div class="trust-bar reveal">
+  <div class="trust-item"><div class="t-num">12</div><div class="t-label">Mercati monitorati</div></div>
+  <div class="trust-item"><div class="t-num">24/7</div><div class="t-label">Assistente AI disponibile</div></div>
+  <div class="trust-item"><div class="t-num">7</div><div class="t-label">Capitoli di formazione</div></div>
+  <div class="trust-item"><div class="t-num">100%</div><div class="t-label">Gratuito</div></div>
+</div>
 
 <main>
   <div class="wrap">
 
-    <section class="instruments-section" id="strumenti">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">I tuoi strumenti</h2>
-          <div class="section-sub">Fino a 5 strumenti — clicca su uno per vederne storia e andamento</div>
-        </div>
-        <button class="ghost-btn" id="customize-btn">Personalizza</button>
-      </div>
-      <div class="instrument-grid" id="instrument-grid">
-        <div id="instruments-status"><span class="dots"><span></span><span></span><span></span></span></div>
-      </div>
-    </section>
+    <div class="feature-row reveal">
 
-    <div class="combo-row" id="notizie">
-      <div class="ai-access-card">
-        <div><span class="dot-live"></span><span class="eyebrow">Assistente online</span></div>
-        <h2>Hai una domanda sul mercato?</h2>
-        <p>Chiedi all'assistente Meridian di spiegarti una notizia, un andamento, o il contesto dietro un movimento di prezzo.</p>
-        <a class="cta-gold" href="chat.html">Apri l'assistente →</a>
-      </div>
-      <div class="news-box">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Notizie di oggi</h2>
-            <div class="section-sub">Quello che muove l'economia globale</div>
+      <a href="school.html" class="learn-card" style="text-decoration:none;color:inherit;">
+        <div class="icon">
+          <svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="16" fill="none" stroke="#57B8FF" stroke-width="2"/><path d="M11 20 L15 14 L19 17 L24 10" stroke="#4CAF7D" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2>Impara il trading con un'AI, gratis</h2>
+        <p>7 capitoli su basi, Forex, rischio, candele e altro — con l'assistente pronto a rispiegarti ciò che non capisci.</p>
+        <span class="cta-accent">Entra nella Scuola →</span>
+      </a>
+
+      <nav class="quicknav">
+        <a class="quicknav-item" href="#notizie"><span class="qicon">📰</span><span class="qlabel">News</span><span class="qarrow">clicca →</span></a>
+        <a class="quicknav-item" href="#strumenti"><span class="qicon">📊</span><span class="qlabel">Mercati</span><span class="qarrow">clicca →</span></a>
+        <a class="quicknav-item" href="chat.html"><span class="qicon">🤖</span><span class="qlabel">Assistente</span><span class="qarrow">clicca →</span></a>
+      </nav>
+
+      <div class="right-stack">
+        <div class="rs-block" id="strumenti">
+          <div class="rs-head">
+            <h3>Strumenti</h3>
+            <button class="ghost-btn" id="customize-btn">Personalizza</button>
+          </div>
+          <div class="instrument-list" id="instrument-grid">
+            <div id="instruments-status"><span class="dots"><span></span><span></span><span></span></span></div>
           </div>
         </div>
-        <div class="news-scroll" id="news-list">
-          <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
+        <div class="rs-block" id="notizie">
+          <div class="rs-head"><h3>News</h3></div>
+          <div class="news-scroll" id="news-list">
+            <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
+          </div>
         </div>
       </div>
+
     </div>
 
-    <a href="school.html" style="text-decoration:none;color:inherit;">
-      <div class="school-banner">
-        <svg viewBox="0 0 100 100" width="100" height="100">
-          <rect x="10" y="55" width="14" height="30" fill="#4CAF7D"/>
-          <rect x="30" y="35" width="14" height="50" fill="#D4A93E"/>
-          <rect x="50" y="45" width="14" height="40" fill="#4CAF7D"/>
-          <rect x="70" y="20" width="14" height="65" fill="#D4A93E"/>
-        </svg>
-        <div>
-          <h2>Scuola del Trading</h2>
-          <p>Impara le basi del trading, del forex e dell'economia finanziaria, capitolo dopo capitolo — con l'assistente sempre pronto a spiegarti ciò che non capisci.</p>
-        </div>
-        <span class="cta-gold">Inizia a imparare →</span>
+    <section class="chapters-section reveal">
+      <div class="chapters-head">
+        <h2>Capitoli della Scuola</h2>
+        <span>scorri →</span>
       </div>
-    </a>
+      <div class="chapters-scroll">
+        <a class="chapter-bubble" href="school-basi.html"><div class="circle">📘</div><div class="cnum">CAP. 01</div><div class="clabel">Le basi</div></a>
+        <a class="chapter-bubble" href="school-forex.html"><div class="circle">💱</div><div class="cnum">CAP. 02</div><div class="clabel">Il Forex</div></a>
+        <a class="chapter-bubble" href="school-rischio.html"><div class="circle">🛡️</div><div class="cnum">CAP. 03</div><div class="clabel">Gestione rischio</div></a>
+        <a class="chapter-bubble" href="school-candele.html"><div class="circle">🕯️</div><div class="cnum">CAP. 04</div><div class="clabel">Candele</div></a>
+        <a class="chapter-bubble" href="school-supporti-resistenze.html"><div class="circle">📈</div><div class="cnum">CAP. 05</div><div class="clabel">Supporti/Trend</div></a>
+        <a class="chapter-bubble" href="school-liquidita.html"><div class="circle">💧</div><div class="cnum">CAP. 06</div><div class="clabel">Liquidità</div></a>
+        <a class="chapter-bubble" href="school-psicologia.html"><div class="circle">🧠</div><div class="cnum">CAP. 07</div><div class="clabel">Psicologia</div></a>
+        <a class="chapter-bubble" href="school.html"><div class="circle">＋</div><div class="cnum">&nbsp;</div><div class="clabel">Vedi tutti</div></a>
+      </div>
+    </section>
 
   </div>
 </main>
 
-<footer>Meridian — versione dimostrativa.</footer>
-
+<footer>
+  <div class="wrap">
+    <div class="credit">Meridian — creato da <em>Davide Sky</em></div>
+  </div>
+</footer>
 
 <!-- Modal dettaglio strumento -->
 <div class="modal-overlay" id="detail-modal">
@@ -396,7 +387,6 @@
 </div>
 
 <script>
-// ---------- Catalogo strumenti (statico, crypto — funziona senza chiavi) ----------
 const CATALOG = [
   {id:'bitcoin', symbol:'BTC', name:'Bitcoin', blurb:"La prima criptovaluta al mondo, creata nel 2009 da un autore anonimo con lo pseudonimo Satoshi Nakamoto, pensata come moneta digitale decentralizzata al di fuori del controllo di banche e governi."},
   {id:'ethereum', symbol:'ETH', name:'Ethereum', blurb:"La piattaforma che nel 2015 ha introdotto gli smart contract, alla base della maggior parte delle applicazioni decentralizzate e di migliaia di altri progetti crypto."},
@@ -420,11 +410,8 @@ function getSelection(){
   }catch(e){}
   return DEFAULT_SELECTION;
 }
-function setSelection(ids){
-  localStorage.setItem('meridian:selection', JSON.stringify(ids));
-}
+function setSelection(ids){ localStorage.setItem('meridian:selection', JSON.stringify(ids)); }
 
-// ---------- Rendering strumenti ----------
 async function loadInstrument(item){
   try{
     const res = await fetch('/api/instrument?id=' + item.id);
@@ -443,7 +430,6 @@ async function renderInstruments(){
 
   grid.innerHTML = results.map(r => `
     <div class="instrument-card" data-id="${r.id}">
-      <div class="name">${r.name}</div>
       <div class="sym">${r.symbol}</div>
       <div class="price">${r.price != null ? '$' + r.price.toLocaleString('en-US') : '—'}</div>
       <div class="chg ${r.changePct >= 0 ? 'up' : 'down'}">${r.changePct != null ? (r.changePct >= 0 ? '+' : '') + r.changePct.toFixed(2) + '%' : ''}</div>
@@ -458,7 +444,6 @@ async function renderInstruments(){
   });
 }
 
-// ---------- Modal dettaglio ----------
 const detailModal = document.getElementById('detail-modal');
 function openDetail(item){
   document.getElementById('detail-name').textContent = item.name;
@@ -468,9 +453,7 @@ function openDetail(item){
   if(item.changePct != null){
     chg.textContent = (item.changePct >= 0 ? '+' : '') + item.changePct.toFixed(2) + '% (24h)';
     chg.className = 'chg ' + (item.changePct >= 0 ? 'up' : 'down');
-  } else {
-    chg.textContent = '';
-  }
+  } else { chg.textContent = ''; }
   document.getElementById('detail-blurb').textContent = item.blurb;
   drawSparkline(item.history, item.changePct >= 0);
   detailModal.classList.add('open');
@@ -492,7 +475,6 @@ function drawSparkline(history, isUp){
   svg.innerHTML = `<polyline points="${points}" fill="none" stroke="${color}" stroke-width="2"/>`;
 }
 
-// ---------- Modal selettore ----------
 const pickerModal = document.getElementById('picker-modal');
 const pickerList = document.getElementById('picker-list');
 document.getElementById('customize-btn').addEventListener('click', openPicker);
@@ -512,9 +494,7 @@ function openPicker(){
   pickerList.querySelectorAll('.picker-item').forEach(el => {
     el.querySelector('input').addEventListener('change', () => {
       const checked = pickerList.querySelectorAll('input:checked').length;
-      if(checked > 5){
-        el.querySelector('input').checked = false;
-      }
+      if(checked > 5){ el.querySelector('input').checked = false; }
       el.classList.toggle('selected', el.querySelector('input').checked);
       updatePickerState();
     });
@@ -534,7 +514,6 @@ document.getElementById('picker-save').addEventListener('click', () => {
   renderInstruments();
 });
 
-// ---------- Notizie ----------
 async function loadNews(){
   const list = document.getElementById('news-list');
   try{
@@ -547,7 +526,7 @@ async function loadNews(){
     list.innerHTML = data.news.map(n => `
       <div class="news-item">
         <div class="news-meta"><span class="tag">${n.source}</span> · ${n.time}</div>
-        <h3>${n.title}</h3>
+        <h4>${n.title}</h4>
         <p>${n.summary}</p>
       </div>
     `).join('');
@@ -555,6 +534,33 @@ async function loadNews(){
     list.innerHTML = '<div id="news-status">Non riesco a caricare le notizie in questo momento.</div>';
   }
 }
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('in'); revealObserver.unobserve(entry.target); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Comparsa scaglionata delle bolle dei capitoli
+document.querySelectorAll('.chapter-bubble').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(10px)';
+  el.style.transition = `opacity 0.5s ease ${i * 0.06}s, transform 0.5s ease ${i * 0.06}s`;
+});
+const chapterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      document.querySelectorAll('.chapter-bubble').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+      chapterObserver.disconnect();
+    }
+  });
+}, {threshold:0.1});
+const chaptersScroll = document.querySelector('.chapters-scroll');
+if(chaptersScroll) chapterObserver.observe(chaptersScroll);
 
 renderInstruments();
 loadNews();
