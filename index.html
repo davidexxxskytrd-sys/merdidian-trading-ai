@@ -252,6 +252,8 @@
   .picker-item .p-name{font-size:14px;}
   .picker-item .p-sym{font-size:12px;color:var(--muted);margin-left:auto;}
   .picker-note{font-size:12.5px;color:var(--muted);margin-bottom:4px;}
+  .picker-cat{font-size:11px;color:var(--accent);letter-spacing:0.5px;text-transform:uppercase;font-weight:600;margin:14px 0 4px;}
+  .picker-cat:first-child{margin-top:0;}
   .picker-save{background:var(--accent);border:1px solid var(--accent);color:var(--accent-text);font-weight:600;font-size:14px;padding:10px 18px;cursor:pointer;width:100%;border-radius:2px;}
   .picker-save:disabled{opacity:0.4;cursor:default;}
 
@@ -388,20 +390,33 @@
 
 <script>
 const CATALOG = [
-  {id:'bitcoin', symbol:'BTC', name:'Bitcoin', blurb:"La prima criptovaluta al mondo, creata nel 2009 da un autore anonimo con lo pseudonimo Satoshi Nakamoto, pensata come moneta digitale decentralizzata al di fuori del controllo di banche e governi."},
-  {id:'ethereum', symbol:'ETH', name:'Ethereum', blurb:"La piattaforma che nel 2015 ha introdotto gli smart contract, alla base della maggior parte delle applicazioni decentralizzate e di migliaia di altri progetti crypto."},
-  {id:'solana', symbol:'SOL', name:'Solana', blurb:"Blockchain nata nel 2020, progettata per gestire un numero molto alto di transazioni al secondo con costi molto bassi rispetto a Bitcoin ed Ethereum."},
-  {id:'ripple', symbol:'XRP', name:'XRP', blurb:"Creata nel 2012 dall'azienda Ripple per velocizzare ed abbattere i costi dei pagamenti internazionali tra banche e istituzioni finanziarie."},
-  {id:'cardano', symbol:'ADA', name:'Cardano', blurb:"Blockchain lanciata nel 2017, sviluppata con un approccio accademico basato su ricerca scientifica sottoposta a revisione paritaria."},
-  {id:'dogecoin', symbol:'DOGE', name:'Dogecoin', blurb:"Nata nel 2013 come parodia scherzosa del mondo delle criptovalute, è diventata nel tempo una delle monete digitali più conosciute e scambiate al mondo."},
-  {id:'litecoin', symbol:'LTC', name:'Litecoin', blurb:"Una delle prime alternative a Bitcoin, lanciata nel 2011 con l'obiettivo di offrire transazioni più rapide ed economiche."},
-  {id:'polkadot', symbol:'DOT', name:'Polkadot', blurb:"Progetto che punta a collegare tra loro blockchain diverse e indipendenti, permettendo loro di scambiarsi dati e valore."},
-  {id:'chainlink', symbol:'LINK', name:'Chainlink', blurb:"Rete che collega i contratti intelligenti a dati provenienti dal mondo reale, come prezzi di mercato o eventi esterni."},
-  {id:'avalanche-2', symbol:'AVAX', name:'Avalanche', blurb:"Blockchain lanciata nel 2020, nota per la velocità con cui conferma le transazioni e per i costi contenuti."},
-  {id:'tron', symbol:'TRX', name:'Tron', blurb:"Piattaforma lanciata nel 2017, pensata inizialmente per contenuti digitali e intrattenimento decentralizzato."},
-  {id:'binancecoin', symbol:'BNB', name:'BNB', blurb:"Il token della piattaforma di scambio Binance, usato tra le altre cose per pagare le commissioni sulla rete a costi ridotti."}
+  // Criptovalute — CoinGecko, sempre gratis
+  {id:'bitcoin', type:'crypto', symbol:'BTC', name:'Bitcoin', category:'Crypto', blurb:"La prima criptovaluta al mondo, creata nel 2009 da un autore anonimo con lo pseudonimo Satoshi Nakamoto, pensata come moneta digitale decentralizzata al di fuori del controllo di banche e governi."},
+  {id:'ethereum', type:'crypto', symbol:'ETH', name:'Ethereum', category:'Crypto', blurb:"La piattaforma che nel 2015 ha introdotto gli smart contract, alla base della maggior parte delle applicazioni decentralizzate e di migliaia di altri progetti crypto."},
+  {id:'solana', type:'crypto', symbol:'SOL', name:'Solana', category:'Crypto', blurb:"Blockchain nata nel 2020, progettata per gestire un numero molto alto di transazioni al secondo con costi molto bassi rispetto a Bitcoin ed Ethereum."},
+  {id:'ripple', type:'crypto', symbol:'XRP', name:'XRP', category:'Crypto', blurb:"Creata nel 2012 dall'azienda Ripple per velocizzare ed abbattere i costi dei pagamenti internazionali tra banche e istituzioni finanziarie."},
+  {id:'cardano', type:'crypto', symbol:'ADA', name:'Cardano', category:'Crypto', blurb:"Blockchain lanciata nel 2017, sviluppata con un approccio accademico basato su ricerca scientifica sottoposta a revisione paritaria."},
+  {id:'dogecoin', type:'crypto', symbol:'DOGE', name:'Dogecoin', category:'Crypto', blurb:"Nata nel 2013 come parodia scherzosa del mondo delle criptovalute, è diventata nel tempo una delle monete digitali più conosciute e scambiate al mondo."},
+  {id:'litecoin', type:'crypto', symbol:'LTC', name:'Litecoin', category:'Crypto', blurb:"Una delle prime alternative a Bitcoin, lanciata nel 2011 con l'obiettivo di offrire transazioni più rapide ed economiche."},
+  {id:'polkadot', type:'crypto', symbol:'DOT', name:'Polkadot', category:'Crypto', blurb:"Progetto che punta a collegare tra loro blockchain diverse e indipendenti, permettendo loro di scambiarsi dati e valore."},
+  {id:'chainlink', type:'crypto', symbol:'LINK', name:'Chainlink', category:'Crypto', blurb:"Rete che collega i contratti intelligenti a dati provenienti dal mondo reale, come prezzi di mercato o eventi esterni."},
+  {id:'avalanche-2', type:'crypto', symbol:'AVAX', name:'Avalanche', category:'Crypto', blurb:"Blockchain lanciata nel 2020, nota per la velocità con cui conferma le transazioni e per i costi contenuti."},
+  {id:'tron', type:'crypto', symbol:'TRX', name:'Tron', category:'Crypto', blurb:"Piattaforma lanciata nel 2017, pensata inizialmente per contenuti digitali e intrattenimento decentralizzato."},
+  {id:'binancecoin', type:'crypto', symbol:'BNB', name:'BNB', category:'Crypto', blurb:"Il token della piattaforma di scambio Binance, usato tra le altre cose per pagare le commissioni sulla rete a costi ridotti."},
+  // Forex — Twelve Data (richiede TWELVEDATA_API_KEY)
+  {id:'EUR/USD', type:'forex', symbol:'EUR/USD', name:'Euro / Dollaro', category:'Forex', blurb:"La coppia di valute più scambiata al mondo, che mette a confronto l'euro e il dollaro statunitense."},
+  {id:'GBP/USD', type:'forex', symbol:'GBP/USD', name:'Sterlina / Dollaro', category:'Forex', blurb:"Conosciuta tra i trader come 'Cable', mette a confronto la sterlina britannica e il dollaro statunitense."},
+  {id:'USD/JPY', type:'forex', symbol:'USD/JPY', name:'Dollaro / Yen', category:'Forex', blurb:"Una delle coppie più liquide del Forex, molto sensibile alle decisioni della Banca del Giappone."},
+  // Indici — Twelve Data
+  {id:'SPX', type:'index', symbol:'SPX', name:'S&P 500', category:'Indici', blurb:"L'indice che raggruppa le 500 maggiori aziende quotate negli Stati Uniti, tra i termometri più seguiti dell'economia americana."},
+  {id:'IXIC', type:'index', symbol:'IXIC', name:'Nasdaq Composite', category:'Indici', blurb:"Indice che raccoglie migliaia di titoli quotati sul Nasdaq, con un peso importante del settore tecnologico."},
+  {id:'DJI', type:'index', symbol:'DJI', name:'Dow Jones', category:'Indici', blurb:"Uno degli indici più storici al mondo, composto da 30 grandi aziende industriali statunitensi."},
+  // Materie prime — Twelve Data
+  {id:'XAU/USD', type:'commodity', symbol:'XAU/USD', name:'Oro', category:'Materie prime', blurb:"Il prezzo dell'oro espresso in dollari, storicamente considerato un bene rifugio nei momenti di incertezza economica."},
+  {id:'XAG/USD', type:'commodity', symbol:'XAG/USD', name:'Argento', category:'Materie prime', blurb:"Il prezzo dell'argento espresso in dollari: una materia prima sia industriale che d'investimento."},
+  {id:'WTI/USD', type:'commodity', symbol:'WTI/USD', name:'Petrolio WTI', category:'Materie prime', blurb:"Il prezzo del petrolio West Texas Intermediate, uno dei principali riferimenti mondiali per il greggio."}
 ];
-const DEFAULT_SELECTION = ['bitcoin','ethereum','solana','ripple','cardano'];
+const DEFAULT_SELECTION = ['bitcoin','ethereum','EUR/USD','SPX','XAU/USD'];
 
 function getSelection(){
   try{
@@ -414,7 +429,10 @@ function setSelection(ids){ localStorage.setItem('meridian:selection', JSON.stri
 
 async function loadInstrument(item){
   try{
-    const res = await fetch('/api/instrument?id=' + item.id);
+    const url = item.type === 'crypto'
+      ? '/api/instrument?id=' + encodeURIComponent(item.id)
+      : '/api/quote?symbol=' + encodeURIComponent(item.symbol);
+    const res = await fetch(url);
     const data = await res.json();
     return {...item, price: data.price, changePct: data.changePct, history: data.history || []};
   }catch(e){
@@ -483,12 +501,16 @@ pickerModal.addEventListener('click', (e) => { if(e.target === pickerModal) pick
 
 function openPicker(){
   const current = new Set(getSelection());
-  pickerList.innerHTML = CATALOG.map(c => `
-    <label class="picker-item ${current.has(c.id) ? 'selected' : ''}" data-id="${c.id}">
-      <input type="checkbox" ${current.has(c.id) ? 'checked' : ''}>
-      <span class="p-name">${c.name}</span>
-      <span class="p-sym">${c.symbol}</span>
-    </label>
+  const categories = [...new Set(CATALOG.map(c => c.category))];
+  pickerList.innerHTML = categories.map(cat => `
+    <div class="picker-cat">${cat}</div>
+    ${CATALOG.filter(c => c.category === cat).map(c => `
+      <label class="picker-item ${current.has(c.id) ? 'selected' : ''}" data-id="${c.id}">
+        <input type="checkbox" ${current.has(c.id) ? 'checked' : ''}>
+        <span class="p-name">${c.name}</span>
+        <span class="p-sym">${c.symbol}</span>
+      </label>
+    `).join('')}
   `).join('');
   updatePickerState();
   pickerList.querySelectorAll('.picker-item').forEach(el => {
