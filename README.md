@@ -57,14 +57,32 @@ se ne acquisti uno da un registrar come Namecheap o Register.it (a pagamento, in
 - Per la pubblicità: quando il sito ha contenuto e traffico regolare, richiedi
   l'attivazione di Google AdSense (gratuita) da https://www.google.com/adsense.
 
+## 6. Attiva forex, indici e materie prime (facoltativo)
+Le criptovalute funzionano già gratis senza fare nulla. Per vedere anche cambio euro/dollaro,
+S&P 500, oro, petrolio ecc. serve un'altra chiave gratuita:
+1. Vai su https://twelvedata.com/pricing, scorri fino al piano "Free" e registrati.
+2. Nella tua dashboard trovi l'API key: copiala.
+3. Su Vercel, Settings → Environment Variables, aggiungi `TWELVEDATA_API_KEY` con quel valore.
+4. Redeploy.
+
+Il piano gratuito ha un limite di richieste (circa 800 al giorno, 8 al minuto): va benissimo per
+un sito con pochi visitatori, ma se il traffico cresce andrà rivisto.
+
 ## Struttura dei file
 - `index.html` — la home (strumenti personalizzabili, accesso AI in evidenza, notizie, banner Scuola del Trading)
 - `chat.html` — la pagina dedicata all'assistente AI
 - `school.html` — indice della Scuola del Trading
 - `school-basi.html`, `school-forex.html`, `school-rischio.html` — i tre capitoli scritti finora
 - `api/chat.js` — collega il sito a Gemini, tenendo la chiave al sicuro
-- `api/instrument.js` — prezzo, variazione e storico di un singolo strumento (crypto, gratuito)
+- `api/instrument.js` — prezzo, variazione e storico delle criptovalute (CoinGecko, gratuito)
+- `api/quote.js` — prezzo, variazione e storico di forex, indici e materie prime (Twelve Data)
 - `api/market.js` — recupera le notizie economiche da NewsAPI
+
+## Novità: strumenti personalizzabili, ora con più categorie
+In home, ogni visitatore può cliccare "Personalizza" e scegliere fino a 5 strumenti tra
+criptovalute, coppie forex (EUR/USD, GBP/USD, USD/JPY), indici (S&P 500, Nasdaq, Dow Jones)
+e materie prime (oro, argento, petrolio). Le crypto funzionano gratis da subito; per le altre
+categorie serve la chiave TWELVEDATA_API_KEY (punto 6 sopra).
 
 ## Novità: Scuola del Trading
 In home, sotto la sezione notizie, c'è un banner che porta a `school.html`: l'indice dei
