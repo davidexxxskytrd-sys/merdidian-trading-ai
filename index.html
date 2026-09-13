@@ -415,21 +415,11 @@ const CATALOG = [
   {id:'USD/CHF', type:'forex', symbol:'USD/CHF', name:'Dollaro / Franco svizzero', category:'Forex', blurb:"Il franco svizzero è tradizionalmente considerato una valuta rifugio nei momenti di instabilità dei mercati."},
   {id:'AUD/USD', type:'forex', symbol:'AUD/USD', name:'Dollaro australiano / Dollaro USA', category:'Forex', blurb:"Molto legata all'andamento delle materie prime, data l'importanza dell'export minerario per l'economia australiana."},
   {id:'USD/CAD', type:'forex', symbol:'USD/CAD', name:'Dollaro USA / Dollaro canadese', category:'Forex', blurb:"Il dollaro canadese è spesso influenzato dal prezzo del petrolio, una delle principali esportazioni del Canada."},
-  // Indici — Twelve Data
-  {id:'SPX', type:'index', symbol:'SPX', name:'S&P 500', category:'Indici', blurb:"L'indice che raggruppa le 500 maggiori aziende quotate negli Stati Uniti, tra i termometri più seguiti dell'economia americana."},
-  {id:'IXIC', type:'index', symbol:'IXIC', name:'Nasdaq Composite', category:'Indici', blurb:"Indice che raccoglie migliaia di titoli quotati sul Nasdaq, con un peso importante del settore tecnologico."},
-  {id:'DJI', type:'index', symbol:'DJI', name:'Dow Jones', category:'Indici', blurb:"Uno degli indici più storici al mondo, composto da 30 grandi aziende industriali statunitensi."},
-  {id:'N225', type:'index', symbol:'N225', name:'Nikkei 225', category:'Indici', blurb:"Il principale indice della borsa di Tokyo, che raggruppa 225 delle maggiori aziende quotate in Giappone."},
-  {id:'FTSE', type:'index', symbol:'FTSE', name:'FTSE 100', category:'Indici', blurb:"L'indice delle 100 maggiori aziende quotate alla Borsa di Londra."},
-  {id:'GDAXI', type:'index', symbol:'GDAXI', name:'DAX', category:'Indici', blurb:"Il principale indice azionario tedesco, che raggruppa le maggiori aziende quotate a Francoforte."},
-  // Materie prime — Twelve Data
+  // Materie prime — Twelve Data (solo metalli, trattati come coppie valutarie: funzionano nel piano gratuito)
   {id:'XAU/USD', type:'commodity', symbol:'XAU/USD', name:'Oro', category:'Materie prime', blurb:"Il prezzo dell'oro espresso in dollari, storicamente considerato un bene rifugio nei momenti di incertezza economica."},
-  {id:'XAG/USD', type:'commodity', symbol:'XAG/USD', name:'Argento', category:'Materie prime', blurb:"Il prezzo dell'argento espresso in dollari: una materia prima sia industriale che d'investimento."},
-  {id:'WTI/USD', type:'commodity', symbol:'WTI/USD', name:'Petrolio WTI', category:'Materie prime', blurb:"Il prezzo del petrolio West Texas Intermediate, uno dei principali riferimenti mondiali per il greggio."},
-  {id:'BRENT/USD', type:'commodity', symbol:'BRENT/USD', name:'Petrolio Brent', category:'Materie prime', blurb:"L'altro grande riferimento mondiale per il petrolio, estratto principalmente nel Mare del Nord."},
-  {id:'NATGAS/USD', type:'commodity', symbol:'NATGAS/USD', name:'Gas naturale', category:'Materie prime', blurb:"Il prezzo del gas naturale, molto sensibile alla stagionalità (domanda per riscaldamento) e alle tensioni geopolitiche sull'energia."}
+  {id:'XAG/USD', type:'commodity', symbol:'XAG/USD', name:'Argento', category:'Materie prime', blurb:"Il prezzo dell'argento espresso in dollari: una materia prima sia industriale che d'investimento."}
 ];
-const DEFAULT_SELECTION = ['bitcoin','ethereum','EUR/USD','SPX','XAU/USD'];
+const DEFAULT_SELECTION = ['bitcoin','ethereum','EUR/USD','XAU/USD','GBP/USD'];
 
 function getSelection(){
   try{
