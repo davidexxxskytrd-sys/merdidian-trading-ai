@@ -371,6 +371,7 @@
       <div id="detail-chg" class="chg">—</div>
     </div>
     <svg class="modal-chart" id="detail-chart" viewBox="0 0 400 80" preserveAspectRatio="none"></svg>
+    <div id="detail-chart-status" style="margin-bottom:12px;"></div>
     <div class="modal-blurb" id="detail-blurb">—</div>
   </div>
 </div>
@@ -439,11 +440,12 @@ function getSelection(){
 }
 function setSelection(ids){ localStorage.setItem('meridian:selection', JSON.stringify(ids)); }
 
-async function loadInstrument(item){
+async function loadInstrument(item, basic){
   try{
-    const url = item.type === 'crypto'
+    const base = item.type === 'crypto'
       ? '/api/instrument?id=' + encodeURIComponent(item.id)
       : '/api/quote?symbol=' + encodeURIComponent(item.symbol);
+    const url = base + (basic ? '&basic=1' : '');
     const res = await fetch(url);
     const data = await res.json();
     return {...item, price: data.price, changePct: data.changePct, history: data.history || []};
@@ -456,7 +458,7 @@ async function renderInstruments(){
   const grid = document.getElementById('instrument-grid');
   const selectedIds = getSelection();
   const selected = CATALOG.filter(c => selectedIds.includes(c.id));
-  const results = await Promise.all(selected.map(loadInstrument));
+  const results = await Promise.all(selected.map(item => loadInstrument(item, true)));
 
   grid.innerHTML = results.map(r => `
     <div class="instrument-card" data-id="${r.id}">
@@ -467,14 +469,28 @@ async function renderInstruments(){
   `).join('');
 
   grid.querySelectorAll('.instrument-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const item = results.find(r => r.id === card.dataset.id);
-      openDetail(item);
+    card.addEventListener('click', async () => {
+      const base = CATALOG.find(c => c.id === card.dataset.id);
+      openDetailLoading(base);
+      const fresh = await loadInstrument(base, false);
+      openDetail(fresh);
     });
   });
 }
 
 const detailModal = document.getElementById('detail-modal');
+
+function openDetailLoading(item){
+  document.getElementById('detail-name').textContent = item.name;
+  document.getElementById('detail-sym').textContent = item.symbol;
+  document.getElementById('detail-price').textContent = '—';
+  document.getElementById('detail-chg').textContent = '';
+  document.getElementById('detail-blurb').textContent = item.blurb;
+  document.getElementById('detail-chart').innerHTML = '';
+  document.getElementById('detail-chart-status').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
+  detailModal.classList.add('open');
+}
+
 function openDetail(item){
   document.getElementById('detail-name').textContent = item.name;
   document.getElementById('detail-sym').textContent = item.symbol;
@@ -485,7 +501,8 @@ function openDetail(item){
     chg.className = 'chg ' + (item.changePct >= 0 ? 'up' : 'down');
   } else { chg.textContent = ''; }
   document.getElementById('detail-blurb').textContent = item.blurb;
-  drawSparkline(item.history, item.changePct >= 0);
+  document.getElementById('detail-chart-status').innerHTML = '';
+  drawSparkline(item.history, item.changePct == null ? true : item.changePct >= 0);
   detailModal.classList.add('open');
 }
 document.getElementById('detail-close').addEventListener('click', () => detailModal.classList.remove('open'));
@@ -493,7 +510,12 @@ detailModal.addEventListener('click', (e) => { if(e.target === detailModal) deta
 
 function drawSparkline(history, isUp){
   const svg = document.getElementById('detail-chart');
-  if(!history || history.length < 2){ svg.innerHTML = ''; return; }
+  const status = document.getElementById('detail-chart-status');
+  if(!history || history.length < 2){
+    svg.innerHTML = '';
+    status.innerHTML = '<span style="font-size:13px;color:var(--muted);">Grafico non disponibile per questo strumento al momento.</span>';
+    return;
+  }
   const min = Math.min(...history), max = Math.max(...history);
   const range = max - min || 1;
   const points = history.map((v, i) => {
