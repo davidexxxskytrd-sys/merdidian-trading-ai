@@ -269,8 +269,8 @@
   <div class="wrap">
     <div class="logo">Meridian<em>.</em></div>
     <nav>
-      <a href="#strumenti">Mercati</a>
-      <a href="#notizie">Notizie</a>
+      <a href="mercati.html">Mercati</a>
+      <a href="news.html">Notizie</a>
       <a href="school.html">Scuola del Trading</a>
       <a href="chat.html" class="assistant-link">Assistente →</a>
     </nav>
@@ -307,8 +307,8 @@
       </a>
 
       <nav class="quicknav">
-        <a class="quicknav-item" href="#notizie"><span class="qicon">📰</span><span class="qlabel">News</span><span class="qarrow">clicca →</span></a>
-        <a class="quicknav-item" href="#strumenti"><span class="qicon">📊</span><span class="qlabel">Mercati</span><span class="qarrow">clicca →</span></a>
+        <a class="quicknav-item" href="news.html"><span class="qicon">📰</span><span class="qlabel">News</span><span class="qarrow">clicca →</span></a>
+        <a class="quicknav-item" href="mercati.html"><span class="qicon">📊</span><span class="qlabel">Mercati</span><span class="qarrow">clicca →</span></a>
         <a class="quicknav-item" href="chat.html"><span class="qicon">🤖</span><span class="qlabel">Assistente</span><span class="qarrow">clicca →</span></a>
       </nav>
 
@@ -316,14 +316,17 @@
         <div class="rs-block" id="strumenti">
           <div class="rs-head">
             <h3>Strumenti</h3>
-            <button class="ghost-btn" id="customize-btn">Personalizza</button>
+            <div style="display:flex;gap:8px;">
+              <button class="ghost-btn" id="customize-btn">Personalizza</button>
+              <a class="ghost-btn" href="mercati.html" style="text-decoration:none;">Vedi tutti →</a>
+            </div>
           </div>
           <div class="instrument-list" id="instrument-grid">
             <div id="instruments-status"><span class="dots"><span></span><span></span><span></span></span></div>
           </div>
         </div>
         <div class="rs-block" id="notizie">
-          <div class="rs-head"><h3>News</h3></div>
+          <div class="rs-head"><h3>News</h3><a class="ghost-btn" href="news.html" style="text-decoration:none;">Vedi tutte →</a></div>
           <div class="news-scroll" id="news-list">
             <div id="news-status"><span class="dots"><span></span><span></span><span></span></span></div>
           </div>
