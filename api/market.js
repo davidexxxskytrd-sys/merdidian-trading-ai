@@ -6,11 +6,12 @@
 export default async function handler(req, res) {
   const news = [];
   const newsKey = process.env.NEWS_API_KEY;
+  const pageSize = Math.min(parseInt(req.query.count) || 8, 30);
 
   if (newsKey) {
     try {
       const nRes = await fetch(
-        `https://newsapi.org/v2/everything?q=economy%20OR%20markets%20OR%20inflation%20OR%20central%20bank&language=en&sortBy=publishedAt&pageSize=8&apiKey=${newsKey}`
+        `https://newsapi.org/v2/everything?q=economy%20OR%20markets%20OR%20inflation%20OR%20central%20bank&language=en&sortBy=publishedAt&pageSize=${pageSize}&apiKey=${newsKey}`
       );
       const nData = await nRes.json();
       if (nData.articles) {
