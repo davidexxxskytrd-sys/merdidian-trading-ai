@@ -3,16 +3,30 @@
 // per un singolo strumento, usando CoinGecko (gratuito, senza chiave).
 
 export default async function handler(req, res) {
-  const { id } = req.query;
+  const { id, basic } = req.query;
   if (!id) {
     return res.status(400).json({ error: 'Parametro id mancante' });
   }
 
   try {
+    const priceReq = fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true`
+    );
+
+    if (basic === '1') {
+      // Solo il prezzo, niente storico: usato per l'aggiornamento automatico leggero
+      const priceRes = await priceReq;
+      const priceData = await priceRes.json();
+      const p = priceData[id];
+      return res.status(200).json({
+        price: p ? p.usd : null,
+        changePct: p ? p.usd_24h_change : null,
+        history: []
+      });
+    }
+
     const [priceRes, histRes] = await Promise.all([
-      fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd&include_24hr_change=true`
-      ),
+      priceReq,
       fetch(
         `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30`
       )
