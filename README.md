@@ -68,6 +68,15 @@ S&P 500, oro, petrolio ecc. serve un'altra chiave gratuita:
 Il piano gratuito ha un limite di richieste (circa 800 al giorno, 8 al minuto): va benissimo per
 un sito con pochi visitatori, ma se il traffico cresce andrà rivisto.
 
+I prezzi in home si aggiornano automaticamente ogni 90 secondi mentre la pagina resta aperta,
+senza bisogno di ricaricarla — l'intervallo è pensato apposta per restare dentro ai limiti
+del piano gratuito anche con 5 strumenti selezionati insieme.
+
+Nota: alcuni simboli di indici e materie prime (es. GDAXI, NATGAS/USD) potrebbero non essere
+riconosciuti esattamente da Twelve Data a seconda di eventuali aggiornamenti del loro catalogo.
+Se uno strumento specifico non mostra dati, verifica il nome esatto cercandolo su
+twelvedata.com e aggiorna il campo corrispondente nel catalogo dentro index.html.
+
 ## Struttura dei file
 - `index.html` — la home (strumenti personalizzabili, accesso AI in evidenza, notizie, banner Scuola del Trading)
 - `chat.html` — la pagina dedicata all'assistente AI
