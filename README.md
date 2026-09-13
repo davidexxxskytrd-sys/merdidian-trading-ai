@@ -57,28 +57,34 @@ se ne acquisti uno da un registrar come Namecheap o Register.it (a pagamento, in
 - Per la pubblicità: quando il sito ha contenuto e traffico regolare, richiedi
   l'attivazione di Google AdSense (gratuita) da https://www.google.com/adsense.
 
-## 6. Attiva forex, indici e materie prime (facoltativo)
-Le criptovalute funzionano già gratis senza fare nulla. Per vedere anche cambio euro/dollaro,
-S&P 500, oro, petrolio ecc. serve un'altra chiave gratuita:
+## 6. Attiva forex e materie prime (facoltativo)
+Le criptovalute funzionano già gratis senza fare nulla. Per vedere anche cambi valutari e
+oro/argento serve un'altra chiave gratuita:
 1. Vai su https://twelvedata.com/pricing, scorri fino al piano "Free" e registrati.
 2. Nella tua dashboard trovi l'API key: copiala.
 3. Su Vercel, Settings → Environment Variables, aggiungi `TWELVEDATA_API_KEY` con quel valore.
-4. Redeploy.
+4. **Importante**: dopo aver aggiunto la chiave, vai su Deployments → tre puntini sull'ultimo →
+   Redeploy. Le variabili d'ambiente vengono lette solo al momento del deploy: senza questo
+   passaggio, la chiave resta salvata ma il sito continua a non vederla.
 
 Il piano gratuito ha un limite di richieste (circa 800 al giorno, 8 al minuto): va benissimo per
-un sito con pochi visitatori, ma se il traffico cresce andrà rivisto.
+un sito con pochi visitatori.
+
+**Limite scoperto testando il piano gratuito**: gli indici di borsa (S&P 500, Nasdaq, Dow Jones
+ecc.) e le materie prime "vere" come petrolio e gas naturale richiedono un piano Twelve Data a
+pagamento (da 29$/mese in su) — il piano gratuito li rifiuta con errore "available starting with
+the Grow or Venture plan". Per questo il catalogo del sito include solo forex e i metalli preziosi
+(oro, argento), che Twelve Data tratta come coppie valutarie e che quindi restano gratuiti.
+Se in futuro vorrai aggiungere indici o petrolio, servirà passare a un piano Twelve Data a pagamento.
 
 I prezzi in home si aggiornano automaticamente ogni 90 secondi mentre la pagina resta aperta,
 senza bisogno di ricaricarla — l'intervallo è pensato apposta per restare dentro ai limiti
 del piano gratuito anche con 5 strumenti selezionati insieme.
 
-Nota: alcuni simboli di indici e materie prime (es. GDAXI, NATGAS/USD) potrebbero non essere
-riconosciuti esattamente da Twelve Data a seconda di eventuali aggiornamenti del loro catalogo.
-Se uno strumento specifico non mostra dati, verifica il nome esatto cercandolo su
-twelvedata.com e aggiorna il campo corrispondente nel catalogo dentro index.html.
-
 ## Struttura dei file
 - `index.html` — la home (strumenti personalizzabili, accesso AI in evidenza, notizie, banner Scuola del Trading)
+- `mercati.html` — pagina dedicata con TUTTI gli strumenti disponibili, divisi per categoria
+- `news.html` — pagina dedicata con più notizie, in formato lista leggibile
 - `chat.html` — la pagina dedicata all'assistente AI
 - `school.html` — indice della Scuola del Trading
 - `school-basi.html`, `school-forex.html`, `school-rischio.html` — i tre capitoli scritti finora
