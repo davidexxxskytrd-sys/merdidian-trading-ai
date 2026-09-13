@@ -3,7 +3,29 @@
 // per un singolo strumento, usando CoinGecko (gratuito, senza chiave).
 
 export default async function handler(req, res) {
-  const { id, basic } = req.query;
+  const { id, ids, basic } = req.query;
+
+  // Modalità multipla: più criptovalute in una sola chiamata (usata dalla pagina Mercati)
+  if (ids) {
+    try {
+      const priceRes = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+      );
+      const priceData = await priceRes.json();
+      const prices = {};
+      for (const key of Object.keys(priceData)) {
+        prices[key] = {
+          price: priceData[key].usd,
+          changePct: priceData[key].usd_24h_change
+        };
+      }
+      return res.status(200).json({ prices });
+    } catch (err) {
+      console.error('Errore instrument.js (batch)', err);
+      return res.status(200).json({ prices: {} });
+    }
+  }
+
   if (!id) {
     return res.status(400).json({ error: 'Parametro id mancante' });
   }
